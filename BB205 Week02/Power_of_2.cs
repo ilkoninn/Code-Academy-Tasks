@@ -10,7 +10,7 @@ namespace MyApp
 
             if (n == 1)
             {
-                Console.WriteLine("The given " + m + " number is power of 2: 2^" + count);
+                Console.WriteLine("The given " + m + " number is power of 2: 2^0");
             }
             else
             {
