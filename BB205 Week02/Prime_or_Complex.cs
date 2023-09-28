@@ -32,7 +32,7 @@ namespace MyApp
                 }
                 else
                 {
-                    Console.WriteLine(n + " is Simple number.");
+                    Console.WriteLine(n + " is Prime number.");
                 }
             }
 
