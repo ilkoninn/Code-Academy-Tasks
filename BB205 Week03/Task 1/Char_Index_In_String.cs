@@ -25,7 +25,7 @@ namespace MyApp
             }
             else
             {
-                Console.Write("\n" + ourAlphabet + " indexs are: ");
+                Console.Write("\n" + ourAlphabet + " indexes are: ");
                 foreach (char c in FindCharInString(ourWord, ourAlphabet)) Console.Write(c + " ");
                 Console.WriteLine();
             }
