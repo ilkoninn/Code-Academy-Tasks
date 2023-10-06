@@ -24,7 +24,7 @@ namespace MyApp
             }
             for (int i = 0; i < numbers.Length; i++)
             {
-                newArr[arr.Length + i] = arr[i];
+                newArr[arr.Length + i] = numbers[i];
             }
 
             arr = newArr;
