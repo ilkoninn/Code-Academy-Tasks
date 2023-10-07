@@ -9,8 +9,13 @@ namespace MyApp
         static void Main(string[] args)
         {
             int[] number = { 13, 21, 14, 9, 34, 12, 4 };
-            InsertArray(ref number, 23, 5, 12, 17);
+
             Console.WriteLine("Our elements: ");
+            foreach (int i in number) Console.Write(i + " ");
+            
+            InsertArray(ref number, 23, 5, 12, 17);
+            
+            Console.WriteLine("\nOur elements of array after program: ");
             foreach (int i in number) Console.Write(i + " ");
 
         }
@@ -24,7 +29,7 @@ namespace MyApp
             }
             for (int i = 0; i < numbers.Length; i++)
             {
-                newArr[arr.Length + i] = arr[i];
+                newArr[arr.Length + i] = numbers[i];
             }
 
             arr = newArr;
