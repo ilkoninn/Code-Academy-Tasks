@@ -8,7 +8,7 @@ namespace MyApp
 {
     internal class Backend : Developer
     {
-        public decimal sqlExperienceYear;
+        public byte sqlExperienceYear;
 
         public Backend(string name)
         {
