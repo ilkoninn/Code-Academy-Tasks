@@ -1,4 +1,4 @@
-﻿namespace MyApp
+namespace MyApp
 {
     internal class Program
     {
@@ -9,7 +9,7 @@
             developerEmployee.name = "Ilkin";
             developerEmployee.surname = "Rajabov";
             developerEmployee.age = 19;
-            developerEmployee.experience = 1.5f;
+            developerEmployee.experience = 2;
 
             Console.WriteLine("=================================\n" +
                 "Information about new Developer\n");
@@ -19,8 +19,9 @@
             Console.WriteLine("Experience:" + developerEmployee.experience);
 
             // Backend section
-            Backend backendEmployee = new Backend("Miraga", "Eliyev", 1);
+            Backend backendEmployee = new Backend("Miraga", "Eliyev");
             backendEmployee.age = 19;
+            backendEmployee.experience = 3;
             backendEmployee.sqlExperienceYear = 2;
             Console.WriteLine("\n===========================================\n" +
                 "Information about new Back-End developer\n");
@@ -35,7 +36,7 @@
             frontendEmployee.name = "Rufet";
             frontendEmployee.surname = "Quliyev";
             frontendEmployee.age = 19;
-            frontendEmployee.experience = 1f;
+            frontendEmployee.experience = 1;
             frontendEmployee.ReactExperienceYear = 3;
             Console.WriteLine("\n===========================================\n" +
                 "Information about new Front-End developer\n");

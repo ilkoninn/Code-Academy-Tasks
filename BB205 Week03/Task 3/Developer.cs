@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +10,12 @@ namespace MyApp
     {
         public string name;
         public string surname;
-        public int age;
-        public float experience;
+        public byte age;
+        public byte experience;
 
-        public string AreYouHired(float exp, int age)
+        public string AreYouHired(byte exp, byte age)
         {
-            if(exp > 1 && age >= 18)
+            if (exp > 1 && age >= 18)
             {
                 return "You have been hired!";
             }

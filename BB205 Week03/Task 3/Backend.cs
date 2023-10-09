@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +8,18 @@ namespace MyApp
 {
     internal class Backend : Developer
     {
-        public string name;
-        public string surname;
-        public int age;
-        public float experience;
-        public float sqlExperienceYear;
+        public decimal sqlExperienceYear;
 
-        public Backend(string name, string surname, float experience)
+        public Backend(string name)
+        {
+            this.name = name;
+        }
+        public Backend(string name, string surname)
+        {
+            this.name=name;
+            this.surname=surname;
+        }
+        public Backend(string name, string surname, byte experience)
         {
             this.name = name;
             this.surname = surname;

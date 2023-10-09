@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +8,6 @@ namespace MyApp
 {
     internal class Frontend : Developer
     {
-        public string name;
-        public string surname;
-        public int age;
-        public float experience;
-        public float ReactExperienceYear;
-
+        public decimal ReactExperienceYear;
     }
 }
