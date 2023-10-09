@@ -8,6 +8,6 @@ namespace MyApp
 {
     internal class Frontend : Developer
     {
-        public float ReactExperienceYear;
+        public decimal ReactExperienceYear;
     }
 }
