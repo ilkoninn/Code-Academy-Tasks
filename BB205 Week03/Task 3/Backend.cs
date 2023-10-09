@@ -8,13 +8,9 @@ namespace MyApp
 {
     internal class Backend : Developer
     {
-        public string name;
-        public string surname;
-        public int age;
-        public float experience;
-        public float sqlExperienceYear;
+        public decimal sqlExperienceYear;
 
-        public Backend(string name, string surname, float experience)
+        public Backend(string name, string surname, decimal experience)
         {
             this.name = name;
             this.surname = surname;
