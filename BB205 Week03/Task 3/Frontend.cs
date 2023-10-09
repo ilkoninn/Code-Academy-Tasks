@@ -8,11 +8,6 @@ namespace MyApp
 {
     internal class Frontend : Developer
     {
-        public string name;
-        public string surname;
-        public int age;
-        public float experience;
         public float ReactExperienceYear;
-
     }
 }
