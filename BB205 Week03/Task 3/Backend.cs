@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,16 @@ namespace MyApp
     {
         public decimal sqlExperienceYear;
 
-        public Backend(string name, string surname, decimal experience)
+        public Backend(string name)
+        {
+            this.name = name;
+        }
+        public Backend(string name, string surname)
+        {
+            this.name=name;
+            this.surname=surname;
+        }
+        public Backend(string name, string surname, byte experience)
         {
             this.name = name;
             this.surname = surname;
