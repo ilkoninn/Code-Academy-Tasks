@@ -10,10 +10,10 @@ namespace MyApp
     {
         public string name;
         public string surname;
-        public int age;
-        public float experience;
+        public byte age;
+        public decimal experience;
 
-        public string AreYouHired(float exp, int age)
+        public string AreYouHired(decimal exp, byte age)
         {
             if(exp > 1 && age >= 18)
             {
