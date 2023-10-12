@@ -48,7 +48,7 @@ namespace ConsoleApp2
                 }
             }
         }
-        private string _brandname
+        private string _brandname;
         public string BrandName 
         {
             get
