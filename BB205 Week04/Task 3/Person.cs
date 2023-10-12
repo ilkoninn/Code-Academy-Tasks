@@ -38,6 +38,7 @@ namespace ConsoleApp2
             }
             set
             {
+                value = value.Trim();
                 string[] newValue = value.Split(" ");
                 if(newValue.Length != 2 )
                 {
