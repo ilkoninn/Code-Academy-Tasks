@@ -1,98 +1,138 @@
-using ConsoleApp2;
+using ConsoleApp3;
+using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Numerics;
+    using System.Reflection.Metadata.Ecma335;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Xml;
 
-namespace ConsoleApp3
-{
-    internal class Program
+    namespace ConsoleApp2
     {
-        static void Main(string[] args)
+        internal class Store
         {
-            bool running = true;
-            Store phones = new Store();
-
-            Console.WriteLine("============== Admin Account ==============\n" +
-                "Welcome to our Phone Admin Dashboard! :D");
-            do
+            private string _name;
+            public string Name
             {
-                Console.WriteLine(
-                    "\n1. Add Phone to DATA\n" +
-                    "2. Show info about Phone\n" +
-                    "3. Show all Phone DATA\n" +
-                    "4. Show Phones' prices between inputs\n" +
-                    "5. Remove Phone from DATA\n" +
-                    "6. Exit\n");
-                Console.Write("Please, choos a number(1-7): ");
-                int userChoice = int.Parse(Console.ReadLine());
-                Menu(phones, userChoice);
-                if(userChoice == 6) running = false;
-
-            } while (running);
-            Console.WriteLine("===========================================");
-
-        }
-        public static void Menu(Store phones, int choice) 
-        {
-            int phoneId = 0;
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("\nPlease enter Phone information:");
-                    Console.Write("Name: ");
-                    string phoneName = Console.ReadLine();
-                    Console.Write("Brand Name: ");
-                    string phoneBrand = Console.ReadLine();
-                    Console.Write("Price: ");
-                    double phonePrice = double.Parse(Console.ReadLine());     
-                    Console.Write("Count: ");
-                    int phoneCount = int.Parse(Console.ReadLine());
-                    phoneId = phones.Phones.Length + 1;
-
-                    Phone newPhone = new Phone(phoneName, phoneBrand, phonePrice, phoneCount, phoneId);
-                    if (newPhone != null)
+                get
+                {
+                    return _name;
+                }
+                set
+                {
+                    if (value.Length >= 3)
                     {
-                        phones.AddPhone(newPhone);
+                        _name = value;
                     }
                     else
                     {
-                        Console.WriteLine("\nPhone not added to Data\n");
+                        Console.WriteLine("Store name should be longer than 3 character!");
                     }
-                    break;
-                case 2:
-                    Console.Write($"\nPlease, enter Phone's ID(1-{phones.Phones.Length}): ");
-                    int inputId= int.Parse(Console.ReadLine());
-                    phones.ShowInfo(inputId);
-                    break;
-                case 3:
-                    Console.WriteLine("\nAll information about Phone Data:");
-                    foreach (Phone phone in phones.ShowAllPhone())
-                    {
-                        Console.WriteLine($"\n{phone.Id}. Phone information:\n" +
-                            $"Phone name: {phone.PhoneName}\n" +
-                            $"Phone brand name: {phone.BrandName}\n" +
-                            $"Phone price: {phone.Price}\n" +
-                            $"Phone count in Data: {phone.Count}");
-                    }
-                    break;
-                case 4:
-                    Console.Write("\nPlease, enter minimum price for phone: ");
-                    int minPrice = int.Parse(Console.ReadLine());
-                    Console.Write("Please, enter maximum price for phone: ");
-                    int maxPrice = int.Parse(Console.ReadLine());
-                    Console.WriteLine("\nPhones between this prices:");
-                    phones.ShowPhoneForPrice(minPrice, maxPrice);
-                    break;
-                case 5:
-                    Console.Write("Please, enter Phone ID for delete the item: ");
-                    int userInput = int.Parse(Console.ReadLine());
-                    
-                    phones.RemovePhone(userInput);
-                    break;
-                case 6:
-                    Console.WriteLine("\n      Program has been stopped!\n");
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice!");
-                    break;
+                }
             }
+            public Phone[] Phones = new Phone[0];
+
+            public void AddPhone(Phone phone)
+            {
+                bool idCheck = false;
+                for (int i = 0; i < Phones.Length; i++)
+                {
+                    if (Phones[i].Name == phone.Name)
+                    {
+                        idCheck = true;
+                        break;
+                    }
+                }
+                if (!idCheck) 
+                {
+                    Phone[] newPhones = new Phone[Phones.Length + 1];
+
+                    for (int i = 0; i < Phones.Length; i++)
+                    {
+                        newPhones[i] = Phones[i];
+                    }
+
+                    newPhones[newPhones.Length - 1] = phone;
+                    Phones = newPhones;
+                    Console.WriteLine("\nNew Phone added to Data\n");
+                }
+                else
+                {
+                    Console.WriteLine($"There is such a phone in Data");
+                }
+            }
+
+            public Phone[] ShowAllPhone()
+            {
+                return Phones;
+            }
+
+            public void ShowInfo(int phoneId)
+            {
+                for (int i = 0; i < Phones.Length; i++)
+                {
+                    if (Phones[i].Id == phoneId)
+                    {
+                        Console.WriteLine($"ID: {phoneId} Phone information:");
+                        Console.WriteLine($"\n{Phones[i].Id}. Phone information:\n" +
+                            $"Phone name: {Phones[i].PhoneName}\n" +
+                            $"Phone brand name: {Phones[i].BrandName}\n" +
+                            $"Phone price: {Phones[i].Price}\n" +
+                            $"Phone count in Data: {Phones[i].Count}");
+                        break;
+                    }
+                }
+            }
+            public void RemovePhone(int phoneId)
+            {
+                bool idCheck = false;
+                for (int i = 0; i < Phones.Length; i++)
+                {
+                    if (Phones[i].Id == phoneId)
+                    {
+                        idCheck = true;
+                        break;
+                    }
+                }
+                if (idCheck)
+                {
+                    Phone[] newPhones = new Phone[Phones.Length - 1];
+                    int index = 0;
+
+                    for (int i = 0; i < Phones.Length; i++)
+                    {
+                        if (Phones[i].Id != phoneId)
+                        {
+                            newPhones[index] = Phones[i];
+                            index++;
+                        }
+                    }
+                    Phones = newPhones;
+                    Console.WriteLine($"\n{phoneId}. Phone has been removed from Data");
+                }
+                else
+                {
+                    Console.WriteLine($"\nThere is no such a Phone in Data!");
+                }
+            }
+            public void ShowPhoneForPrice(double minPrice, double maxPrice)
+            {
+                Console.WriteLine("-----------------------------------------");
+                for (int i = 0; i < Phones.Length; i++)
+                    {
+                        if (Phones[i].Price >= minPrice && Phones[i].Price <= maxPrice)
+                        {
+                        Console.WriteLine($"\n{Phones[i].Id}. Phone information:\n" +
+                            $"Phone name: {Phones[i].PhoneName}\n" +
+                            $"Phone brand name: {Phones[i].BrandName}\n" +
+                            $"Phone price: {Phones[i].Price}\n" +
+                            $"Phone count in Data: {Phones[i].Count}");
+                        }
+                    }
+                Console.WriteLine("\n-----------------------------------------");
+        }
+
         }
     }
-}
