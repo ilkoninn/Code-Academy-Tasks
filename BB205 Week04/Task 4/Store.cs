@@ -1,4 +1,4 @@
-﻿    using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -38,7 +38,7 @@
                 bool idCheck = false;
                 for (int i = 0; i < Phones.Length; i++)
                 {
-                    if (Phones[i].Id == phone.Id)
+                    if (Phones[i].PhoneName == phone.PhoneName && Phones[i].BrandName == phone.BrandName)
                     {
                         idCheck = true;
                         break;
@@ -58,7 +58,7 @@
                 }
                 else
                 {
-                    Console.WriteLine($"{phone.Id}. Phone is in Data");
+                    Console.WriteLine($"There is such a phone in Data");
                 }
             }
 
