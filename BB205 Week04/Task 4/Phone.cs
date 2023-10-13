@@ -1,4 +1,4 @@
-﻿using ConsoleApp3;
+using ConsoleApp3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +48,25 @@ namespace ConsoleApp2
                 }
             }
         }
-        public string BrandName { get; set; }
+        private string _brandname;
+        public string BrandName 
+        {
+            get
+            {
+                return _brandname;
+            }
+            set
+            {
+                if (value.Length >= 3)
+                {
+                    _brandname = value;
+                }
+                else
+                {
+                    Console.WriteLine("Store name should be longer than 3 character!");
+                }
+            }
+        }
         public double Price { get; set; }
         public int Count { get; set; }
 

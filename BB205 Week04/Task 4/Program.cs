@@ -1,4 +1,4 @@
-﻿using ConsoleApp2;
+using ConsoleApp2;
 
 namespace ConsoleApp3
 {
@@ -7,7 +7,6 @@ namespace ConsoleApp3
         static void Main(string[] args)
         {
             bool running = true;
-            int phoneId = 0;
             Store phones = new Store();
 
             Console.WriteLine("============== Admin Account ==============\n" +

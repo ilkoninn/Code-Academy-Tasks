@@ -1,4 +1,5 @@
-﻿    using System;
+using ConsoleApp3;
+using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -38,7 +39,7 @@
                 bool idCheck = false;
                 for (int i = 0; i < Phones.Length; i++)
                 {
-                    if (Phones[i].Id == phone.Id)
+                    if (Phones[i].Name == phone.Name)
                     {
                         idCheck = true;
                         break;
@@ -55,10 +56,11 @@
 
                     newPhones[newPhones.Length - 1] = phone;
                     Phones = newPhones;
+                    Console.WriteLine("\nNew Phone added to Data\n");
                 }
                 else
                 {
-                    Console.WriteLine($"{phone.Id}. Phone is in Data");
+                    Console.WriteLine($"There is such a phone in Data");
                 }
             }
 
@@ -108,27 +110,29 @@
                         }
                     }
                     Phones = newPhones;
-                    Console.WriteLine($"{phoneId}. Phone has been removed from Data");
+                    Console.WriteLine($"\n{phoneId}. Phone has been removed from Data");
                 }
                 else
                 {
-                    Console.WriteLine($"There is no such a Phone in Data!");
+                    Console.WriteLine($"\nThere is no such a Phone in Data!");
                 }
             }
             public void ShowPhoneForPrice(double minPrice, double maxPrice)
             {
+                Console.WriteLine("-----------------------------------------");
                 for (int i = 0; i < Phones.Length; i++)
-                {
-                    if (Phones[i].Price >= minPrice && Phones[i].Price <= maxPrice)
                     {
-                    Console.WriteLine($"\n{Phones[i].Id}. Phone information:\n" +
-                        $"Phone name: {Phones[i].PhoneName}\n" +
-                        $"Phone brand name: {Phones[i].BrandName}\n" +
-                        $"Phone price: {Phones[i].Price}\n" +
-                        $"Phone count in Data: {Phones[i].Count}");
-                }
-                }
-            }
+                        if (Phones[i].Price >= minPrice && Phones[i].Price <= maxPrice)
+                        {
+                        Console.WriteLine($"\n{Phones[i].Id}. Phone information:\n" +
+                            $"Phone name: {Phones[i].PhoneName}\n" +
+                            $"Phone brand name: {Phones[i].BrandName}\n" +
+                            $"Phone price: {Phones[i].Price}\n" +
+                            $"Phone count in Data: {Phones[i].Count}");
+                        }
+                    }
+                Console.WriteLine("\n-----------------------------------------");
+        }
 
         }
     }
