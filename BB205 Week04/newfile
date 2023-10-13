@@ -1,0 +1,369 @@
+namespace ConsoleApp4
+{
+    internal class Program
+    {
+        static int userId = 0;
+        static void Main(string[] args)
+        {
+            Company company = new Company();   
+            bool running = true;
+
+            Console.WriteLine("=============== Welcome to Company App ===============\n");
+            do
+            {
+                if(company.Name == null)
+                {
+                    Console.WriteLine("\t======= Create Section =======\n");
+                    Console.WriteLine("\t1. Create Company");
+                    Console.WriteLine("\t0. Exit");
+                    Console.Write("\nPlease, enter a number(0-1): ");
+                    string userChoice = Console.ReadLine();
+                    if(int.Parse(userChoice) == 0) running = false;
+                    if(int.TryParse(userChoice, out int choice))
+                    {
+                        FirstMenu(company, choice);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice, you should be enter a number!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"\n\t======= {company.Name} =======\n");
+                    Console.WriteLine("\t1. Register a user(to company");
+                    Console.WriteLine("\t2. Login a user(to company)");
+                    Console.WriteLine("\t3. See all users in a company(GetAll)");
+                    Console.WriteLine("\t4. Get users information with search text");
+                    Console.WriteLine("\t5. Update user's data(UpdateByUsername)");
+                    Console.WriteLine("\t6. Delete user from company(DeleteByUsername)\n" +
+                        "\t0. Exit");
+                    Console.Write("\nPlease, enter a number(0-6): ");
+                    string userChoice = Console.ReadLine();
+                    if (int.TryParse(userChoice, out int choice))
+                    {
+                        SecondMenu(company, choice);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice, you should be enter a number!");
+                    }
+                }
+
+            }while(running);
+            Console.WriteLine("\n\t  Program has been stopped! ");
+            Console.WriteLine("======================================================");
+        }
+        public static void FirstMenu(Company company, int choice)
+        {
+            switch(choice) 
+            {
+                case 1:
+                    Console.WriteLine("\nPlease, enter company's information:");
+                    Console.Write("Company name: ");
+                    company.Name = Console.ReadLine();
+                    Console.WriteLine("\nNew company has been created!\n");
+                    break;
+                case 0:
+                    break;
+                default:
+                    Console.WriteLine("\nInvalid input!\n");
+                    break;
+            }
+        }
+        public static void SecondMenu(Company company, int choice)
+        {
+            switch(choice)
+            {
+                case 1:
+                    Console.WriteLine("\n===== User Register Section =====\n");
+                    Console.Write("First Name: ");
+                    string name = Console.ReadLine();
+                    Console.Write("Last Name: ");
+                    string surname = Console.ReadLine();
+                    USER:
+                    Console.Write("Password: ");
+                    string password = Console.ReadLine();
+
+                    if(password.Length >= 5)
+                    {
+                        company.Register(name, surname, password, userId++);
+                        Console.WriteLine($"\nNew user added to Data!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPassword length is so short!");
+                        goto USER;
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("\n===== User Login Section =====\n");
+                    Console.Write("Username: ");
+                    string username = Console.ReadLine();
+                    Console.Write("Password: ");
+                    string userPassword = Console.ReadLine();
+                    company.Login(username, userPassword);
+                    break;
+                case 3:
+                    Console.WriteLine("\n====== All Users Information ======\n");
+                    Console.WriteLine("\nName | Surname | Email | Username\n");
+                    foreach(var item in company.GetAll())
+                    {
+                        Console.WriteLine($"{item.Name} | {item.Surname} | {item.Email} | {item.Username}");
+                    }
+                    break;
+                case 4:
+                    Console.WriteLine("Please, enter a text for search information of users:");
+                    Console.Write("Your input: ");
+                    string userInput = Console.ReadLine();
+                    Console.WriteLine("\nName | Surname | Email | Username\n");
+                    foreach (var item in company.GetByUsername(userInput))
+                    {
+                        Console.WriteLine($"{item.Name} | {item.Surname} | {item.Email} | {item.Username}");
+                    }
+                    break;
+                case 5:
+                    Console.WriteLine("Please, enter a choice and username for update his/her information:");
+                    Console.Write("Username: ");
+                    string userInput2 = Console.ReadLine();
+                    Console.WriteLine("\n a. Update name\r\n b. Update surname\r\n c. Update username\r\n d. Update email\n");
+                    Console.Write("User choice: ");
+                    string userChoice = Console.ReadLine();
+                    company.UpdateByUsername(userInput2, userChoice);
+                    break;
+                case 6:
+                    Console.WriteLine("Please, enter a username for delete his/her information:");
+                    Console.Write("Username: ");
+                    string userInput3 = Console.ReadLine();
+                    company.DeleteByUsername(userInput3);
+                    Console.WriteLine("User succesfully deleted!");
+                    break;
+                case 7:
+                    return;
+                default:
+                    Console.WriteLine("Invalid choice, try again!");
+                    break;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    internal class Company
+    {
+        private string _name;
+        public string Name { get; set; }
+        User[] users;
+
+        public Company()
+        {
+            users = new User[0];
+        }
+        public void Register(string name, string surname, string password, int userId)
+        {
+            bool checkUser = false;
+            for(int i = 0; i < users.Length; i++)
+            {
+                if (users[i].Id == userId) 
+                {
+                    checkUser= true;
+                    break;
+                }
+            }
+            if (!checkUser)
+            {
+                string usernameInput = $"{name.ToLower()}.{surname.ToLower()}";
+                string emailInput = $"{name.ToLower()}.{surname.ToLower()}@gmail.com";
+                User newUser = new User(name, surname, emailInput, password, usernameInput);
+
+                Array.Resize(ref users, users.Length + 1);
+                users[users.Length - 1] = newUser;
+            }
+            else
+            {
+                Console.WriteLine("There is a such user in Company!");
+            }
+        }
+        public void Login(string username, string password)
+        {
+            bool checkLogin = false;
+            for(int i = 0; i < users.Length; i++)
+            {
+                if (users[i].Username == username && users[i].Password == password)
+                {
+                    checkLogin = true;
+                    break;
+                }
+            }
+            if (checkLogin)
+            {
+                Console.WriteLine("\n\tYou are logged in!");
+            }
+            else
+            {
+                Console.WriteLine("\n\tYou are not logged in!");
+            }
+
+        }
+        public User[] GetAll()
+        {
+            return users;
+        }
+
+        public User[] GetByUsername(string username)
+        {
+            User[] newUsers = new User[0];
+
+            for(int i = 0;  i < users.Length;i++)
+            {
+                if (users[i].Username.ToLower().Contains(username))
+                {
+                    Array.Resize(ref newUsers, newUsers.Length + 1);
+                    newUsers[newUsers.Length - 1] = users[i];
+                }
+            }
+
+            return newUsers;
+        }
+
+        public void UpdateByUsername(string username, string userChoice)
+        {
+            for(int i = 0; i < users.Length;i++)
+            {
+                if (users[i].Username == username) 
+                {
+                    bool running = true;
+                    while(running)
+                    {
+                        switch (userChoice)
+                        {
+                            case "a":
+                                Console.Write("Please, enter name for change:");
+                                string name = Console.ReadLine();
+                                users[i].Name = name;
+                                Console.WriteLine("User's Name has been changed!");
+                                break;
+                            case "b":
+                                Console.Write("Please, enter surname for change:");
+                                string surname = Console.ReadLine();
+                                users[i].Surname = surname;
+                                Console.WriteLine("User's Surname has been changed!");
+                                break;
+                            case "c":
+                                Console.Write("Please, enter username for change:");
+                                string userName = Console.ReadLine();
+                                users[i].Username = userName;
+                                Console.WriteLine("User;s Userame has been changed!");
+                                break;
+                            case "d":
+                                Console.Write("Please, enter email for change:");
+                                string email = Console.ReadLine();
+                                users[i].Email = email;
+                                Console.WriteLine("User's Email has been changed!");
+                                break;
+                            default:
+                                running = false;
+                                Console.WriteLine("\nInvalid choice, try again!\n");
+                                break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        public void DeleteByUsername(string username)
+        {
+            User[] newUsers = new User[users.Length - 1];
+            
+            for(int i = 0; i < users.Length;i++)
+            {
+                if (users[i].Username == username)
+                {
+                    continue;
+                }
+                newUsers[i] = users[i];
+            }
+
+            users = newUsers;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    internal class User
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Username { get; set; }
+        public int Id { get; set; }
+
+        public User(string name, string surname, string email, string password, string username)
+        {
+            Name= name;
+            Surname= surname;
+            Email= email;
+            Password= password;
+            Username= username;
+        }
+        public User(string name, string surname, string email, string password, string username, int id)
+        {
+            Name = name;
+            Surname = surname;
+            Email = email;
+            Password = password;
+            Username = username;
+            Id = id;
+        }
+    }
+}
+
