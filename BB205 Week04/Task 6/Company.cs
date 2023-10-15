@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -179,16 +179,24 @@ namespace CompanyConsoleApp
         public void DeleteUser(string username, string password)
         {
             bool userCheck = false;
+            bool usernameCheck = false;
             for (int i = 1; i < users.Length; i++)
             {
-                if (users[i].Username == username &&
-                    users[i].Password == password)
+                if (users[i].Password == password)
                 {
                     userCheck = true;
                     break;
                 }
             }
-            if (userCheck)
+            for (int i = 1; i < users.Length; i++)
+            {
+                if (users[i].Username == username)
+                {
+                    usernameCheck = true;
+                    break;
+                }
+            }
+            if (userCheck && usernameCheck)
             {
                 User[] newUsers = new User[users.Length - 1];
                 int index = 0;
@@ -208,29 +216,37 @@ namespace CompanyConsoleApp
             }
             else if (users[0].Username == username)
             {
-                Console.WriteLine("\nAdmin user can not remove from Data!");
+                Console.WriteLine("\nUser admin can not remove from Data!");
             }
             else
             {
-                Console.WriteLine("\nThere is no such a user in Company!\n\nDo you want to change user infomation?");
-                Console.WriteLine("1. Change user information");
-                Console.WriteLine("2. Go back to menu");
-                PATH10:
-                Console.Write("User choice: ");
-                string userChoice = Console.ReadLine();
-                if (userChoice == "1")
+                if (usernameCheck)
                 {
-                    UpdateByUsername(username);
-                }
-                else if (userChoice == "2")
-                {
-                    UpdateByUsername("");
+                    Console.WriteLine("\nThere is such a user in Company, but password is wrong!\n\nDo you want to change user infomation?");
+                    Console.WriteLine("1. Change user information");
+                    Console.WriteLine("2. Go back to menu");
+                    PATH10:
+                    Console.Write("User choice: ");
+                    string userChoice = Console.ReadLine();
+                    if (userChoice == "1")
+                    {
+                        UpdateByUsername(username);
+                    }
+                    else if (userChoice == "2")
+                    {
+                        UpdateByUsername("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice, try again!");
+                        goto PATH10;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice, try again!");
-                    goto PATH10;
+                    UpdateByUsername(username);
                 }
+
             }
         }
     }
