@@ -87,6 +87,22 @@ namespace CompanyConsoleApp
             return newUsers;
         }
 
+        public User GetByUsername(string username)
+        {
+            User user = null;
+
+            for(int i =  0; i < users.Length;i++)
+            {
+                if (users[i].Username == username)
+                {
+                    user = users[i];
+                    break;
+                }
+            }
+
+            return user;
+        }
+
         public void UpdateByUsername(string username)
         {
             bool checkUser = false;
@@ -115,16 +131,13 @@ namespace CompanyConsoleApp
                             Console.Write("Please, enter name for change: ");
                             string name = Console.ReadLine().Trim();
                             user.Name = name;
-                            user.Username = $"{name.ToLower()}.{user.Surname.ToLower()}";
-                            Console.WriteLine($"User's Name has been changed! New username: {user.Username}");
+                            Console.WriteLine($"User's Name has been changed!");
                             running = false;
                             break;
                         case "b":
                             Console.Write("Please, enter surname for change:");
                             string surname = Console.ReadLine().Trim();
-                            user.Surname = surname;
-                            user.Username = $"{user.Name.ToLower()}.{surname.ToLower()}";
-                            Console.WriteLine($"User's Surname has been changed! New username: {user.Username}");
+                            Console.WriteLine($"User's Surname has been changed!");
                             running = false;
                             break;
                         case "c":
