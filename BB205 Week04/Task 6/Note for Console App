@@ -1,6 +1,6 @@
-﻿------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
-			 Console App Taskının Gedişatı
+			Console App Taskının Gedişatı
 
 
 14/10/2023 11:32 am
@@ -34,7 +34,7 @@ Company Console App Bitdi!
 
 ------------------------------------------------------------------------------
 
-		        Console App Haqqında Məlumat
+			Console App Haqqında Məlumat
 
 Hazırlanmış bu Company Console App-i proqrama run verdik də ilk öncə bizi 
 "Create Section" menyusu qarşılayır. Bu bölüm sayəsində öz şirkətimizi 
@@ -59,6 +59,7 @@ Bu menyuda da 6 seçənəy var, bunlar,
 - Delete(User silmək)
 - See All Users(Bütün user-ları görmək)
 - Search Bar(User-ları verilmiş text-ə əsasən axtarmaq)
+- Search with username(Username-ə əsasən search edir)
 - Update(User-ların məlumatlarını yeniləmək)
 - Exit
 
@@ -73,6 +74,11 @@ dəyişməyə icazə verir, əks halda bizi əsas menyumuza qaytarır. "See All 
 metodu isə daxil edilmiş user-lərin ad, soyad, email və username-lərini göstərir.
 "Search Bar" metodu isə daxil edilmiş yazıya əsasən user-ların məlumatlarını
 ekrana çıxardır. "See All Users" kimi eyni şəkildə user-lərin ad, soyad, email və 
-username-lərini göstərir. "Update" metodu verilmiş user-in məlumatlarını dəyişir, 
-bura ad, soyad, username, email və şifrə daxildir.
+username-lərini göstərir. "Search with username" metodu verilmiş datanı daxil edilən
+input-ə əsasən axtarır və axtarılan user-ın məlumatlarını ekrana çıxarır. "Update" 
+metodu verilmiş user-in məlumatlarını dəyişir, bura ad, soyad, username, email 
+və şifrə daxildir. 
+
+Console App-də bir çox kiçik xüsusiyyətlər var, proqramı işlətdikcə qarşınıza
+çıxacaq :D
 
