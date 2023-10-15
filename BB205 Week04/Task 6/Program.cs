@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace CompanyConsoleApp
 {
@@ -8,13 +10,15 @@ namespace CompanyConsoleApp
         {
             Company company = new Company();
             bool running = true;
+            bool checkLogin = false;
+
 
             Console.WriteLine("============ Welcome to Company App ============\n");
             do
             {
                 if (company.Name == null)
                 {
-                    Console.WriteLine("\t======= Create Section =======\n");
+                    Console.WriteLine("      ========= Create Section =========\n");
                     Console.WriteLine("\t1. Create Company");
                     Console.WriteLine("\t0. Exit");
                     Console.Write("\n\tPlease, enter a number(0-1): ");
@@ -29,17 +33,42 @@ namespace CompanyConsoleApp
                         Console.WriteLine("Invalid choice, you should be enter a number!");
                     }
                 }
+                else if (company.GetAll().Length == 1 && !checkLogin)
+                {
+                    Console.WriteLine($"\n      ============== {company.Name} ==============\n");
+                    Console.WriteLine("\t1. Register");
+                    Console.WriteLine("\t2. Login");
+                    Console.WriteLine("\t0. Exit");
+                    Console.Write("\n\tPlease, enter a number(0-2): ");
+                    string userChoice = Console.ReadLine();
+                    if (int.Parse(userChoice) == 0) running = false;
+                    if (int.TryParse(userChoice, out int choice))
+                    {
+                        switch (choice)
+                        {
+                            case 1:
+                                UserRegistration(company);
+                                break;
+                            case 2:
+                                if(UserLogin(company)) checkLogin = true;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice, you should be enter a number!");
+                    }
+                }
                 else
                 {
                     Console.WriteLine($"\n      ============== {company.Name} ==============\n");
-                    Console.WriteLine("\t1. Register a user(to company");
-                    Console.WriteLine("\t2. Login a user(to company)");
-                    Console.WriteLine("\t3. See all users in a company(GetAll)");
-                    Console.WriteLine("\t4. Get users information with search text");
-                    Console.WriteLine("\t5. Update user's data(UpdateByUsername)");
-                    Console.WriteLine("\t6. Delete user from company(DeleteByUsername)\n" +
-                        "\t0. Exit");
-                    Console.Write("\n\tPlease, enter a number(0-6): ");
+                    Console.WriteLine("\t1. Register a user(to company)");
+                    Console.WriteLine("\t2. Delete user from company");
+                    Console.WriteLine("\t3. See all users in a company");
+                    Console.WriteLine("\t4. Get users information with search bar");
+                    Console.WriteLine("\t5. Update user's data");
+                    Console.WriteLine("\t0. Exit");
+                    Console.Write("\n\tPlease, enter a number(0-5): ");
                     string userChoice = Console.ReadLine();
                     if (int.TryParse(userChoice, out int choice))
                     {
@@ -80,7 +109,7 @@ namespace CompanyConsoleApp
                     UserRegistration(company);
                     break;
                 case 2:
-                    UserLogin(company);
+                    UserDelete(company);
                     break;
                 case 3:
                     AllUserInfo(company);
@@ -91,10 +120,7 @@ namespace CompanyConsoleApp
                 case 5:
                     UserUpdate(company);
                     break;
-                case 6:
-                    UserDelete(company);
-                    break;
-                case 7:
+                case 0:
                     return;
                 default:
                     Console.WriteLine("Invalid choice, try again!");
@@ -122,9 +148,9 @@ namespace CompanyConsoleApp
                 goto USER;
             }
         }
-
-        public static void UserLogin(Company company)
+        public static bool UserLogin(Company company)
         {
+            bool checkLogin = false;
             Console.WriteLine("\n\t===== User Login Section =====\n");
             PATH:
             Console.Write("\nUsername: ");
@@ -134,15 +160,17 @@ namespace CompanyConsoleApp
             if (company.Login(username, userPassword))
             {
                 Console.WriteLine("\nYou are logged in!\n");
+                checkLogin = true;
             }
             else
             {
                 Console.WriteLine("\nUsername or password is wrong, try again!\n");
                 Console.WriteLine("\nDo you want to create a user or change your user information?:");
-                Console.WriteLine("1. Create a user");
+                Console.WriteLine("\n1. Create a user");
                 Console.WriteLine("2. Change user information");
                 Console.WriteLine("3. Continue to login");
                 Console.WriteLine("4. Go back to Menu");
+                PATH1:
                 Console.Write("Please, enter a number: ");
                 string userChoice2 = Console.ReadLine();
                 if (userChoice2 == "3") goto PATH;
@@ -152,14 +180,16 @@ namespace CompanyConsoleApp
                 }
                 else
                 {
-                    Console.WriteLine("\tInvalid choice, you should be enter a number!");
+                    Console.WriteLine("\n\tInvalid choice, you should be enter a number!\n");
+                    goto PATH1;
                 }
-
             }
+
+            return checkLogin;
         }
         public static void AllUserInfo(Company company)
         {
-            Console.WriteLine("\n============ All Users Information ============\n");
+            Console.WriteLine("\n============ All Users Information ============");
             Console.WriteLine("\n\tName | Surname | Email | Username\n");
             foreach (var item in company.GetAll())
             {
@@ -173,7 +203,7 @@ namespace CompanyConsoleApp
             string userInput = Console.ReadLine();
             Console.WriteLine("\n============ All Users according to search text ============\n");
             Console.WriteLine("\n\tName | Surname | Email | Username\n");
-            foreach (var item in company.GetByUsername(userInput))
+            foreach (var item in company.GetBySearch(userInput))
             {
                 Console.WriteLine($"{item.Name} | {item.Surname} | {item.Email} | {item.Username}");
             }
@@ -187,10 +217,12 @@ namespace CompanyConsoleApp
         }
         public static void UserDelete(Company company) 
         {
-            Console.WriteLine("Please, enter a username for delete his/her information:");
+            Console.WriteLine("Please, enter a username and password for delete his/her information:");
             Console.Write("Username: ");
             string userInput3 = Console.ReadLine();
-            company.DeleteByUsername(userInput3);
+            Console.Write("Password: ");
+            string userInput4 = Console.ReadLine();
+            company.DeleteUser(userInput3, userInput4);
         }
         public static void UserChanges(Company company, int userChoice)
         {

@@ -1,4 +1,9 @@
-﻿14/10/2023 11:32
+﻿----------------------------------------------------------
+
+			Console App Taskının Gedişatı
+
+
+14/10/2023 11:32 am
 
 Ən son etdiklərin:
 - Visual hissədə gəlişmələr
@@ -10,7 +15,7 @@ Ediləcək olan işlər:
 - Login tam bitməyib, onu düzəltmək lazımdı!
 - Update bölümündə dövriyyə yaratmaq!
 
-15/10/2023 9:33
+15/10/2023 9:33 am
 
 Ən son etdiklərin:
 - Update bölümünü düzəltdin
@@ -22,3 +27,52 @@ Ediləcək olan işlər:
 olmadan və ya register olmadan user-un data üzərində
 hökmü olmasın
 - Vizual bölümləri yenidən check edərsən
+
+15/10/2023 12:40 pm
+
+Company Console App Bitdi!
+
+------------------------------------------------------------------------------
+
+						Console App Haqqında Məlumat
+
+Hazırlanmış bu Company Console App-i proqrama run verdik də ilk öncə bizi 
+"Create Section" menyusu qarşılayır. Bu bölüm sayəsində öz şirkətimizi 
+yarada bilirik(1) və ya proqramı dayandıra bilirik(0). (1) düyməsinə basdıqdan
+sonra bizi yaradacağımız şirkətin adı qarşılayır. Burada şirkətin adını qeyd
+edirik. Qeyd edib enter-ə basdıqdan sonra bizim qarşımıza şirkətin giriş menyusu
+qarşılayır. Bu menyuda 3 seçənək var, bunlar,
+
+- Register
+- Login
+- Exit
+
+olacaq. Bu menyuda register olub şirkətin digər bir menyusuna keçə bilərsiniz
+ya da proqramı yazarkən mənim qurduğum admin user vasitəsi ilə də digər menyuya
+keçid oluna bilər(Username: admin, Password: Admin2003). Burada etmək istədiyim
+odur ki, register olaraq da Data idarə etmə menyusuna keçid etmək olsun və ya
+default user hesabından istifadə edərək də proqrama daxil olunsun. İlk menyunu
+keçdikdən sonra artıq qarşımıza Data idarə etmə bölümü olan ikini menyu çıxır.
+Bu menyuda da 6 seçənəy var, bunlar,
+
+- Register(Yeni user yaratmaq)
+- Delete(User silmək)
+- See All Users(Bütün user-ları görmək)
+- Search Bar(User-ları verilmiş text-ə əsasən axtarmaq)
+- Update(User-ların məlumatlarını yeniləmək)
+- Exit
+
+olacaq. Bu Menyuda görülən işlər bəsitdir. Adlarından bəlli olduğu kimi müəyyən 
+funskiyaları edəcəklər. Sadəcə bu funskiyaların əsas nöqtələrini qeyd edəcəm.
+İlk öncə "Register"-dan başlayaq, bu metod bizdən ad, soyad və şifrə istəyir,
+arxada default olaraq ad və soyaddan istifadə edərək email ilə username yaradır.
+"Delete" metodu, bizdən username və şifrə istəyir, əgər username və ya şifrə yanlış
+olarsa, bizə balaca bir menyu çıxarır. Bu menyu bizdən seçim gözləyəcək. Əgər başda 
+daxil etdiyimiz username düz olarsa, (1)-ə basıb həmin user-in məlumatlarını
+dəyişməyə icazə verir, əks halda bizi əsas menyumuza qaytarır. "See All Users" 
+metodu isə daxil edilmiş user-lərin ad, soyad, email və username-lərini göstərir.
+"Search Bar" metodu isə daxil edilmiş yazıya əsasən user-ların məlumatlarını
+ekrana çıxardır. "See All Users" kimi eyni şəkildə user-lərin ad, soyad, email və 
+username-lərini göstərir. "Update" metodu verilmiş user-in məlumatlarını dəyişir, 
+bura ad, soyad, username, email və şifrə daxildir.
+

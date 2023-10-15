@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CompanyConsoleApp
@@ -15,7 +17,9 @@ namespace CompanyConsoleApp
 
         public Company()
         {
-            users = new User[0];
+            users = new User[1];
+            users[0] = new User("admin1", "admin2", "admin@gmail.com", "Admin2003", "admin");
+
         }
         public void Register(string name, string surname, string password)
         {
@@ -67,7 +71,7 @@ namespace CompanyConsoleApp
             return users;
         }
 
-        public User[] GetByUsername(string username)
+        public User[] GetBySearch(string username)
         {
             User[] newUsers = new User[0];
 
@@ -101,39 +105,58 @@ namespace CompanyConsoleApp
                 bool running = true;
                 while (running)
                 {
-                    Console.WriteLine("\n a. Update name\r\n b. Update surname\r\n c. Update username\r\n d. Update email\n");
+                    Console.WriteLine("\n a. Update name\n b. Update surname\n c. Update username\n d. Update email\n" +
+                        " e. Update password\n");
                     Console.Write("User choice: ");
                     string userChoice = Console.ReadLine();
                     switch (userChoice)
                     {
                         case "a":
                             Console.Write("Please, enter name for change: ");
-                            string name = Console.ReadLine();
-                            user.Name = name.Trim();
-                            user.Username = $"{name}.{user.Surname}";
+                            string name = Console.ReadLine().Trim();
+                            user.Name = name;
+                            user.Username = $"{name.ToLower()}.{user.Surname.ToLower()}";
                             Console.WriteLine($"User's Name has been changed! New username: {user.Username}");
                             running = false;
                             break;
                         case "b":
                             Console.Write("Please, enter surname for change:");
-                            string surname = Console.ReadLine();
-                            user.Surname = surname.Trim();
-                            user.Username = $"{user.Name}.{surname}";
+                            string surname = Console.ReadLine().Trim();
+                            user.Surname = surname;
+                            user.Username = $"{user.Name.ToLower()}.{surname.ToLower()}";
                             Console.WriteLine($"User's Surname has been changed! New username: {user.Username}");
                             running = false;
                             break;
                         case "c":
-                            Console.Write("Please, enter username for change: ");
+                            Console.Write("Please, enter username for change(lower case): ");
                             string userName = Console.ReadLine();
-                            user.Username = userName.Trim();
+                            user.Username = userName.Trim().ToLower();
                             Console.WriteLine("User's Userame has been changed!");
                             running = false;
                             break;
                         case "d":
-                            Console.Write("Please, enter email for change: ");
+                            Console.Write("Please, enter email for change(lower case): ");
                             string email = Console.ReadLine();
                             user.Email = email.Trim();
                             Console.WriteLine("User's Email has been changed!");
+                            running = false;
+                            break;
+                        case "e":
+                            PATH6:
+                            Console.Write("Please, enter new password for change: ");
+                            string newPassword = Console.ReadLine();
+                            Regex regex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
+                            if (regex.IsMatch(newPassword))
+                            {
+                                user.Password = newPassword;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nPassword does not meet the criteria!\nPassword must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, length should not be less than 8.\n");
+                                goto PATH6;
+                            }
+                            Console.WriteLine("\nUser's password has been changed!");
+
                             running = false;
                             break;
                         default:
@@ -143,18 +166,23 @@ namespace CompanyConsoleApp
                     }
                 }
             }
+            else if(username == "")
+            {
+                Console.WriteLine();
+            }
             else
             {
                 Console.WriteLine("\nThere is no such a user in Company\n");
             }
         }
 
-        public void DeleteByUsername(string username)
+        public void DeleteUser(string username, string password)
         {
             bool userCheck = false;
-            for (int i = 0; i < users.Length; i++)
+            for (int i = 1; i < users.Length; i++)
             {
-                if (users[i].Username == username)
+                if (users[i].Username == username &&
+                    users[i].Password == password)
                 {
                     userCheck = true;
                     break;
@@ -178,9 +206,31 @@ namespace CompanyConsoleApp
 
                 Console.WriteLine("\nUser succesfully deleted!");
             }
+            else if (users[0].Username == username)
+            {
+                Console.WriteLine("\nAdmin user can not remove from Data!");
+            }
             else
             {
-                Console.WriteLine("\nThere is no such a user in Company!");
+                Console.WriteLine("\nThere is no such a user in Company!\n\nDo you want to change user infomation?");
+                Console.WriteLine("1. Change user information");
+                Console.WriteLine("2. Go back to menu");
+                PATH10:
+                Console.Write("User choice: ");
+                string userChoice = Console.ReadLine();
+                if (userChoice == "1")
+                {
+                    UpdateByUsername(username);
+                }
+                else if (userChoice == "2")
+                {
+                    UpdateByUsername("");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice, try again!");
+                    goto PATH10;
+                }
             }
         }
     }
