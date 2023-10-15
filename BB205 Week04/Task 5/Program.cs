@@ -65,7 +65,7 @@ namespace ConsoleApp4
             {
                 case 1:
                     Console.WriteLine("\nPlease, enter group informations:");
-                    Console.Write("Group No: ");
+                    Console.Write("Group No("AA000"): ");
                     string userInput = Console.ReadLine();
                     Console.Write("Student limit(5-18): ");
                     int userInput2 = int.Parse(Console.ReadLine());
