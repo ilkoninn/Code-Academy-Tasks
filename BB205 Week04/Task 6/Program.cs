@@ -65,10 +65,11 @@ namespace CompanyConsoleApp
                     Console.WriteLine("\t1. Register a user(to company)");
                     Console.WriteLine("\t2. Delete user from company");
                     Console.WriteLine("\t3. See all users in a company");
-                    Console.WriteLine("\t4. Get users information with search bar");
-                    Console.WriteLine("\t5. Update user's data");
+                    Console.WriteLine("\t4. Get users information by search bar");
+                    Console.WriteLine("\t5. Get one user by username");
+                    Console.WriteLine("\t6. Update user's data");
                     Console.WriteLine("\t0. Exit");
-                    Console.Write("\n\tPlease, enter a number(0-5): ");
+                    Console.Write("\n\tPlease, enter a number(0-6): ");
                     string userChoice = Console.ReadLine();
                     if (int.TryParse(userChoice, out int choice))
                     {
@@ -118,6 +119,9 @@ namespace CompanyConsoleApp
                     UserSearch(company);
                     break;
                 case 5:
+                    UserByUsername(company);
+                    break;
+                case 6:
                     UserUpdate(company);
                     break;
                 case 0:
@@ -207,6 +211,22 @@ namespace CompanyConsoleApp
             {
                 Console.WriteLine($"{item.Name} | {item.Surname} | {item.Email} | {item.Username}");
             }
+        }
+        public static void UserByUsername(Company company)
+        {
+            Console.WriteLine("\n============ User related to username ============");
+            Console.Write("\nPlease, enter username for search: ");
+            string username = Console.ReadLine();
+            if(company.GetByUsername(username) != null)
+            {
+                Console.WriteLine("\n\tName | Surname | Email | Username\n");
+                Console.WriteLine($"{company.GetByUsername(username).Name} | {company.GetByUsername(username).Surname} | {company.GetByUsername(username).Email} | {company.GetByUsername(username).Username}");
+            }
+            else
+            {
+                Console.WriteLine("\nThere is no such a user in Company!");
+            }
+
         }
         public static void UserUpdate(Company company)
         {
