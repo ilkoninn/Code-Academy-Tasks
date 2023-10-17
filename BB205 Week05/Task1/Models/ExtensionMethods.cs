@@ -9,7 +9,7 @@ namespace ExtentionMethods.Models
     internal static class ExtensionMethods
     {
         // Contain section
-        public static bool Contains(this string ourString, char ourChar)
+        public static boolCustomContains(this string ourString, char ourChar)
         {
             bool checkChar = false;
             for (int i = 0; i < ourString.Length; i++)
@@ -22,7 +22,7 @@ namespace ExtentionMethods.Models
             }
             return checkChar;
         }
-        public static bool Contains(this string ourString, string findString)
+        public static bool CustomContains(this string ourString, string findString)
         {
             int lengthOfFind = findString.Length;
             bool checkFind = false;
