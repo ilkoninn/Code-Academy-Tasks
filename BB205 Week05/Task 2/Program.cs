@@ -22,13 +22,11 @@ namespace EnumTask
                     case "USD":
                         Console.Write("\nPlease, enter amount value(AZN): ");
                         decimal userAmount = decimal.Parse(Console.ReadLine());
-                        Console.Write("Please, enter conversation rate: ");
-                        decimal conversation = decimal.Parse(Console.ReadLine());
 
 
                         Money money = new Money(userAmount, Currency.USD);
 
-                        decimal convertedMoney = money.ConvertCurrency(money, conversation);
+                        decimal convertedMoney = money.ConvertCurrency(money, (decimal) 0.59);
 
                         Console.WriteLine($"Converted Amount: {convertedMoney} USD");
                         running = false;
@@ -36,13 +34,11 @@ namespace EnumTask
                     case "TRY":
                         Console.Write("\nPlease, enter amount value(AZN): ");
                         decimal userAmount2 = decimal.Parse(Console.ReadLine());
-                        Console.Write("Please, enter conversation rate: ");
-                        decimal conversation2 = decimal.Parse(Console.ReadLine());
 
 
                         Money money2 = new Money(userAmount2, Currency.TRY);
 
-                        decimal convertedMoney2 = money2.ConvertCurrency(money2, conversation2);
+                        decimal convertedMoney2 = money2.ConvertCurrency(money2, (decimal) 16.48);
 
                         Console.WriteLine($"Converted Amount: {convertedMoney2} TRY");
                         running = false;
@@ -50,13 +46,11 @@ namespace EnumTask
                     case "RUB":
                         Console.Write("\nPlease, enter amount value(AZN): ");
                         decimal userAmount3 = decimal.Parse(Console.ReadLine());
-                        Console.Write("Please, enter conversation rate: ");
-                        decimal conversation3 = decimal.Parse(Console.ReadLine());
 
 
                         Money money3 = new Money(userAmount3, Currency.RUB);
 
-                        decimal convertedMoney3 = money3.ConvertCurrency(money3, conversation3);
+                        decimal convertedMoney3 = money3.ConvertCurrency(money3, (decimal) 57.71);
 
                         Console.WriteLine($"Converted Amount: {convertedMoney3} RUB");
                         running = false;
@@ -64,13 +58,11 @@ namespace EnumTask
                     case "EUR":
                         Console.Write("\nPlease, enter amount value(AZN): ");
                         decimal userAmount4 = decimal.Parse(Console.ReadLine());
-                        Console.Write("Please, enter conversation rate: ");
-                        decimal conversation4 = decimal.Parse(Console.ReadLine());
 
 
                         Money money4 = new Money(userAmount4, Currency.EUR);
 
-                        decimal convertedMoney4 = money4.ConvertCurrency(money4, conversation4);
+                        decimal convertedMoney4 = money4.ConvertCurrency(money4, (decimal) 0.56);
 
                         Console.WriteLine($"Converted Amount: {convertedMoney4} EUR");
                         running = false;
@@ -78,13 +70,11 @@ namespace EnumTask
                     case "GPB":
                         Console.Write("\nPlease, enter amount value(AZN): ");
                         decimal userAmount5 = decimal.Parse(Console.ReadLine());
-                        Console.Write("Please, enter conversation rate: ");
-                        decimal conversation5 = decimal.Parse(Console.ReadLine());
 
 
                         Money money5 = new Money(userAmount5, Currency.GPB);
 
-                        decimal convertedMoney5 = money5.ConvertCurrency(money5, conversation5);
+                        decimal convertedMoney5 = money5.ConvertCurrency(money5, (decimal) 0.48);
 
                         Console.WriteLine($"Converted Amount: {convertedMoney5} GPB");
                         running = false;
@@ -92,13 +82,10 @@ namespace EnumTask
                     case "JPY":
                         Console.Write("\nPlease, enter amount value(AZN): ");
                         decimal userAmount6 = decimal.Parse(Console.ReadLine());
-                        Console.Write("Please, enter conversation rate: ");
-                        decimal conversation6 = decimal.Parse(Console.ReadLine());
-
 
                         Money money6 = new Money(userAmount6, Currency.JPY);
 
-                        decimal convertedMoney6 = money6.ConvertCurrency(money6, conversation6);
+                        decimal convertedMoney6 = money6.ConvertCurrency(money6, (decimal) 88.18);
 
                         Console.WriteLine($"Converted Amount: {convertedMoney6} JPY");
                         running = false;
