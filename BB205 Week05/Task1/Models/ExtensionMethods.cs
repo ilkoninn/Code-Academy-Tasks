@@ -9,7 +9,7 @@ namespace ExtentionMethods.Models
     internal static class ExtensionMethods
     {
         // Contain section
-        public static boolCustomContains(this string ourString, char ourChar)
+        public static bool CustomContains(this string ourString, char ourChar)
         {
             bool checkChar = false;
             for (int i = 0; i < ourString.Length; i++)
