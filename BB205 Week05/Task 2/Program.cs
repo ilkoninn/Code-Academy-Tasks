@@ -1,4 +1,4 @@
-﻿using EnumTask.Models;
+using EnumTask.Models;
 using Microsoft.CSharp.RuntimeBinder;
 
 namespace EnumTask
@@ -9,7 +9,7 @@ namespace EnumTask
         {
             Console.WriteLine("========== Currency App ==========");
             Console.WriteLine("Please, enter to exchange type(AZN to ?)");
-            
+
             bool running = true;
 
             while (running)
@@ -26,9 +26,9 @@ namespace EnumTask
 
                         Money money = new Money(userAmount, Currency.USD);
 
-                        decimal convertedMoney = money.ConvertCurrency(money, (decimal) 0.59);
+                        decimal convertedMoney = money.ConvertCurrency(money, (decimal)0.59);
 
-                        Console.WriteLine($"Converted Amount: {convertedMoney} USD");
+                        Console.WriteLine($"Converted Amount: {convertedMoney} {Currency.USD}");
                         running = false;
                         break;
                     case "TRY":
@@ -38,9 +38,9 @@ namespace EnumTask
 
                         Money money2 = new Money(userAmount2, Currency.TRY);
 
-                        decimal convertedMoney2 = money2.ConvertCurrency(money2, (decimal) 16.48);
+                        decimal convertedMoney2 = money2.ConvertCurrency(money2, (decimal)16.48);
 
-                        Console.WriteLine($"Converted Amount: {convertedMoney2} TRY");
+                        Console.WriteLine($"Converted Amount: {convertedMoney2} {Currency.TRY}");
                         running = false;
                         break;
                     case "RUB":
@@ -50,9 +50,9 @@ namespace EnumTask
 
                         Money money3 = new Money(userAmount3, Currency.RUB);
 
-                        decimal convertedMoney3 = money3.ConvertCurrency(money3, (decimal) 57.71);
+                        decimal convertedMoney3 = money3.ConvertCurrency(money3, (decimal)57.71);
 
-                        Console.WriteLine($"Converted Amount: {convertedMoney3} RUB");
+                        Console.WriteLine($"Converted Amount: {convertedMoney3} {Currency.RUB}");
                         running = false;
                         break;
                     case "EUR":
@@ -62,9 +62,9 @@ namespace EnumTask
 
                         Money money4 = new Money(userAmount4, Currency.EUR);
 
-                        decimal convertedMoney4 = money4.ConvertCurrency(money4, (decimal) 0.56);
+                        decimal convertedMoney4 = money4.ConvertCurrency(money4, (decimal)0.56);
 
-                        Console.WriteLine($"Converted Amount: {convertedMoney4} EUR");
+                        Console.WriteLine($"Converted Amount: {convertedMoney4} {Currency.EUR}");
                         running = false;
                         break;
                     case "GPB":
@@ -74,9 +74,9 @@ namespace EnumTask
 
                         Money money5 = new Money(userAmount5, Currency.GPB);
 
-                        decimal convertedMoney5 = money5.ConvertCurrency(money5, (decimal) 0.48);
+                        decimal convertedMoney5 = money5.ConvertCurrency(money5, (decimal)0.48);
 
-                        Console.WriteLine($"Converted Amount: {convertedMoney5} GPB");
+                        Console.WriteLine($"Converted Amount: {convertedMoney5} {Currency.GPB}");
                         running = false;
                         break;
                     case "JPY":
@@ -85,9 +85,9 @@ namespace EnumTask
 
                         Money money6 = new Money(userAmount6, Currency.JPY);
 
-                        decimal convertedMoney6 = money6.ConvertCurrency(money6, (decimal) 88.18);
+                        decimal convertedMoney6 = money6.ConvertCurrency(money6, (decimal)88.18);
 
-                        Console.WriteLine($"Converted Amount: {convertedMoney6} JPY");
+                        Console.WriteLine($"Converted Amount: {convertedMoney6} {Currency.JPY}");
                         running = false;
                         break;
                     default:
