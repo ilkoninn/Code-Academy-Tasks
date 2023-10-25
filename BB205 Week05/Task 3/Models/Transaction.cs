@@ -15,12 +15,14 @@ namespace BankConsoleApp.Models
         public decimal Amount { get; set;  }
         public DateTime TransactionDate { get; set; }
         public Enums.Operations TransactionType { get; set; }
+        public CurrencyType CurrencyType { get; set; }
 
-        public Transaction(decimal amount, DateTime transactionDate, Enums.Operations transactionType)
+        public Transaction(decimal amount, DateTime transactionDate, Enums.Operations transactionType, CurrencyType currencyType)
         {
             Amount = amount;
             TransactionDate = transactionDate;
             TransactionType = transactionType;
+            CurrencyType = currencyType;
             TransactionId = ++count;
         }
 

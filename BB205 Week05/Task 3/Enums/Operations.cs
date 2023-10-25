@@ -13,10 +13,11 @@ namespace BankConsoleApp.Enums
         WithdrawMoney,
         History,
         Transfer,
-        Accounts,
-        AddAccount,
-        DeleteAccount,
+        Cards,
+        AddCard,
+        DeleteCard,
         CurrencyConversion,
         Settings,
+        Logout,
     }
 }

@@ -8,7 +8,7 @@ namespace BankConsoleApp.Enums
 {
     internal enum AccountType
     {
-        Default = 1,
+        Default = 0,
         Checking,
         Savings,
         Business,

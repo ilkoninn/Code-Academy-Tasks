@@ -7,6 +7,7 @@ namespace BankConsoleApp
 {
     internal class Program
     {
+        internal protected static User LoggedInUser { get; set; }
         static void Main(string[] args)
         {
             Menu();   
@@ -23,12 +24,13 @@ namespace BankConsoleApp
             do
             {
                 // Before operations Menu
-                if(!bank.RunCheck)
+                if(LoggedInUser == null)
                 {
                     Console.WriteLine($"\n\tWelcome to {bank.Name} Bank\n");
                     Console.WriteLine("1. Sign up");
+                    Console.WriteLine("2. Sign in");
                     Console.WriteLine("0. Exit");
-                    Console.Write("\nPlease, enter a number(0-1): ");
+                    Console.Write("\nPlease, enter a number(0-2): ");
                     string userChoice = Console.ReadLine();
                     if (int.TryParse(userChoice, out int choice))
                     {
@@ -43,18 +45,19 @@ namespace BankConsoleApp
                 // After operations Menu
                 else
                 {
-                    Console.WriteLine($"\n\tWelcome {BankAccount.Name} {BankAccount.Surname} \n");
+                    Console.WriteLine($"\n\tWelcome {LoggedInUser.Name} {LoggedInUser.Surname} \n");
                     Console.WriteLine("1. Deposit money");
                     Console.WriteLine("2. Withdraw money"); 
                     Console.WriteLine("3. History");
-                    Console.WriteLine("4. Transfer");
-                    Console.WriteLine("5. Accounts");
-                    Console.WriteLine("6. Add account");
-                    Console.WriteLine("7. Delete account");
-                    Console.WriteLine("8. Currency conversion");
+                    Console.WriteLine("4. Transfer*");
+                    Console.WriteLine("5. Bank cards");
+                    Console.WriteLine("6. Add bank card");
+                    Console.WriteLine("7. Delete bank card");
+                    Console.WriteLine("8. Currency conversion*");
                     Console.WriteLine("9. Settings");
+                    Console.WriteLine("10. Log out");
                     Console.WriteLine("0. Exit");
-                    Console.Write("\nPlease, enter a number(0-8): ");
+                    Console.Write("\nPlease, enter a number(0-10): ");
                     string userChoice = Console.ReadLine();
                     if (Operations.TryParse(userChoice, out Operations choice))
                     {
@@ -83,7 +86,11 @@ namespace BankConsoleApp
                     return;
                     break;
                 case 1:
-                    bank.Register();
+                    bank.UserRegisterSection(); 
+                    LoggedInUser = bank.UserLoginSection();
+                    break;
+                case 2:
+                    LoggedInUser = bank.UserLoginSection();    
                     break;
             }
         }
@@ -96,31 +103,34 @@ namespace BankConsoleApp
                     return;
                     break;
                 case Operations.DepositMoney:
-                    bank.DepositMoney();
+                    LoggedInUser.DepositMoney(LoggedInUser);
                     break;
                 case Operations.WithdrawMoney:
-                    bank.WithdrawMoney();
+                    LoggedInUser.WithdrawMoney(LoggedInUser);
                     break;
                 case Operations.History:
-                    bank.ListTransactions();
+                    LoggedInUser.ListTransaction(LoggedInUser);                    
                     break;
-                case Operations.Transfer:
-                    bank.Transfer();
+                //case Operations.Transfer:
+                //    bank.Transfer();
+                //    break;
+                case Operations.Cards:
+                    LoggedInUser.ShowAllCards(LoggedInUser);
                     break;
-                case Operations.Accounts:
-                    bank.GetAllAccounts();
+                case Operations.AddCard:
+                    LoggedInUser.AddCard(LoggedInUser);
                     break;
-                case Operations.AddAccount:
-                    bank.AddAccount();
-                    break;
-                case Operations.CurrencyConversion:
-                    bank.CurrencyConversion();
-                    break;
-                case Operations.DeleteAccount:
-                    bank.DeleteAccount();
+                //case Operations.CurrencyConversion:
+                //    bank.CurrencyConversion();
+                //    break;
+                case Operations.DeleteCard:
+                    LoggedInUser.DeleteCard(LoggedInUser);
                     break;
                 case Operations.Settings:
-                    bank.Settings();
+                    LoggedInUser.UserSettings(LoggedInUser);
+                    break;
+                case Operations.Logout:
+                    LoggedInUser = null;
                     break;
                 default:
                     Console.WriteLine("Invalid choice, please try again!(0-8)");
