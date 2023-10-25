@@ -2,6 +2,7 @@
 using BankConsoleApp.Exceptions;
 using BankConsoleApp.Interfaces;
 using BankConsoleApp.Models.Bank_Models;
+using BankConsoleApp.Models.User_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ namespace BankConsoleApp.Models
             Name = name;
             UserAccounts = new List<User>();
         }
+        
+        public static void Transfer()
+        {
+            MoneyTransferCardToCard.Transfer();
+        }
         public void UserRegisterSection()
         {
             Registration.Register();
@@ -37,7 +43,7 @@ namespace BankConsoleApp.Models
         {
             User ourUser = null;
             try
-            {
+            {   
                 ourUser = Login.UserLogin();
                 if(ourUser == null)
                 {

@@ -54,6 +54,10 @@ namespace BankConsoleApp.Models
         {
             DeleteBankCard.DeleteAccount(user);
         }
+        public void UserCurrencyConversion(User user)
+        {
+            CurrencyConversionByUserBalance.CurrencyConversion(user);
+        }
         public void UserSettings(User user)
         {
             Settings.UserSettings(user);

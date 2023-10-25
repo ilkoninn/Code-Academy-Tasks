@@ -15,11 +15,26 @@ namespace BankConsoleApp.Models.Bank_Models
         public static void Register()
         {
             Console.WriteLine("\n\tRegistration section\n");
+            string name = UserSectionName();
+            if (name == "") return;
+            string surname = UserSectionSurname();
+            if(surname == "") return;
+            string phoneNumber = UserSectionPhoneNumber();
+            if (phoneNumber == "") return;
+            string email = EmailSection();
+            if (email == "") return;
+            string password = PasswordSection();
+            if (password == "") return;
+            int pincode = PincodeSection();
+            if (pincode == 0) return;
+            AccountType accountType = AccountTypeSection();
+            if(accountType == AccountType.Default) return;
+            CurrencyType currencyType = CurrencyTypeSection();
+            if(currencyType == CurrencyType.Default) return;
 
             RegisterUserSection(
-                UserSectionName(), UserSectionSurname(), UserSectionPhoneNumber(),
-                EmailSection(), PasswordSection(), PincodeSection(), AccountTypeSection(), 
-                CurrencyTypeSection()
+                name, surname, phoneNumber, email, password, 
+                pincode, accountType, currencyType
             );
             
         }
@@ -39,6 +54,7 @@ namespace BankConsoleApp.Models.Bank_Models
                 {
                     goto PATH6;
                 }
+                return "";
             }
 
             return name;
@@ -59,6 +75,7 @@ namespace BankConsoleApp.Models.Bank_Models
                 {
                     goto PATH7;
                 }
+                return "";
             }
 
             return surname;
@@ -79,6 +96,7 @@ namespace BankConsoleApp.Models.Bank_Models
                 {
                     goto PATH8;
                 }
+                return "";
             }
 
             return phoneNumber;
@@ -100,6 +118,7 @@ namespace BankConsoleApp.Models.Bank_Models
                 {
                     goto PATH1;
                 }
+                return "";
             }
 
             return email;
@@ -121,6 +140,7 @@ namespace BankConsoleApp.Models.Bank_Models
                 {
                     goto PATH2;
                 }
+                return "";
             }
 
             return password;
@@ -155,6 +175,7 @@ namespace BankConsoleApp.Models.Bank_Models
                     {
                         goto PATH5;
                     }
+                    return AccountType.Default;
                     break;
 
             }
@@ -191,6 +212,7 @@ namespace BankConsoleApp.Models.Bank_Models
                     {
                         goto PATH6;
                     }
+                    return CurrencyType.Default;
                     break;
             }
 

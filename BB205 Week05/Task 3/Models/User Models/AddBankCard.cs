@@ -15,7 +15,6 @@ namespace BankConsoleApp.Models.User_Models
             AddAllInformation(user, AddAccountType(), AddCurrencyType(), AddPincode(user));
             
         }
-
         public static AccountType AddAccountType()
         {
             PATH9:

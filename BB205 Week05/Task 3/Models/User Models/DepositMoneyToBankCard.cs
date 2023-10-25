@@ -155,7 +155,6 @@ namespace BankConsoleApp.Models.User_Models
                 }
             }
         }
-
         public static void DepositToAZNBalance(BankCard bankCard,CurrencyType currencyType)
         {
             switch (currencyType)

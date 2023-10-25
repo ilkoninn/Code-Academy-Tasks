@@ -49,11 +49,11 @@ namespace BankConsoleApp
                     Console.WriteLine("1. Deposit money");
                     Console.WriteLine("2. Withdraw money"); 
                     Console.WriteLine("3. History");
-                    Console.WriteLine("4. Transfer*");
+                    Console.WriteLine("4. Transfer");
                     Console.WriteLine("5. Bank cards");
                     Console.WriteLine("6. Add bank card");
                     Console.WriteLine("7. Delete bank card");
-                    Console.WriteLine("8. Currency conversion*");
+                    Console.WriteLine("8. Currency conversion");
                     Console.WriteLine("9. Settings");
                     Console.WriteLine("10. Log out");
                     Console.WriteLine("0. Exit");
@@ -87,10 +87,13 @@ namespace BankConsoleApp
                     break;
                 case 1:
                     bank.UserRegisterSection(); 
-                    LoggedInUser = bank.UserLoginSection();
+                    //LoggedInUser = bank.UserLoginSection();
                     break;
                 case 2:
                     LoggedInUser = bank.UserLoginSection();    
+                    break;
+                default:
+                    Console.WriteLine("\nInvalid choice, try again!\n");
                     break;
             }
         }
@@ -111,18 +114,18 @@ namespace BankConsoleApp
                 case Operations.History:
                     LoggedInUser.ListTransaction(LoggedInUser);                    
                     break;
-                //case Operations.Transfer:
-                //    bank.Transfer();
-                //    break;
+                case Operations.Transfer:
+                    Bank.Transfer();
+                    break;
                 case Operations.Cards:
                     LoggedInUser.ShowAllCards(LoggedInUser);
                     break;
                 case Operations.AddCard:
                     LoggedInUser.AddCard(LoggedInUser);
                     break;
-                //case Operations.CurrencyConversion:
-                //    bank.CurrencyConversion();
-                //    break;
+                case Operations.CurrencyConversion:
+                    LoggedInUser.UserCurrencyConversion(LoggedInUser);
+                    break;
                 case Operations.DeleteCard:
                     LoggedInUser.DeleteCard(LoggedInUser);
                     break;
@@ -133,7 +136,7 @@ namespace BankConsoleApp
                     LoggedInUser = null;
                     break;
                 default:
-                    Console.WriteLine("Invalid choice, please try again!(0-8)");
+                    Console.WriteLine("Invalid choice, please try again!(0-10)");
                     break;
             }
         }
