@@ -11,48 +11,72 @@ namespace BankConsoleApp.Models.User_Models
 {
     internal class MoneyTransferCardToCard
     {
-        public static void Transfer()
+        public static void Transfer(User user)
         {
 
             Console.WriteLine("\n\tMoney transfer section\n");
-        PATH14:
-            Console.WriteLine("Please, enter the last 8 digits of the first card numbers");
-            Console.Write("(4050 6070 XXXX XXXX): ");
-            string cardNumber = Console.ReadLine().Trim();
-            Console.WriteLine("\nPlease, enter the last 8 digits of the second card numbers");
-            Console.Write("(4050 6070 XXXX XXXX): ");
-            string cardNumber2 = Console.ReadLine().Trim();
-            if (cardNumber.Length == 9 && cardNumber2.Length == 9)
+            PATH14:
+            Console.WriteLine("Please, choose a card: ");
+            Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
+            int count = 0;
+            BankCard userBankCard = null;
+            foreach (var item in user.bankCards)
             {
-                BankCard newBankCard = null;
-                BankCard newBankCard2 = null;
-                
-                foreach (var item in Bank.UserAccounts)
+                count++;
+                string formattedDate = item.ExpirationDate.ToString("MM/yy");
+                Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
+            }
+            Console.WriteLine("0. Exit");
+            Console.Write($"\nUser choice(0-{count}): ");
+            string userChoice = Console.ReadLine();
+            if (userChoice == "0") return;
+            if (int.TryParse(userChoice, out int choice))
+            {
+                if (choice <= count)
                 {
-                    for(int i = 0; i < item.bankCards.Count; i++)
+                    for (int i = 0; i < user.bankCards.Count; i++)
                     {
-                        if (item.bankCards[i].CardNumber == $"4050 6070 {cardNumber2}")
+                        if (choice == i + 1)
                         {
-                            newBankCard = item.bankCards[i];
+                            userBankCard = user.bankCards[i];
                             break;
                         }
                     }
                 }
+            }
+            else
+            {
+                Console.WriteLine("\nInvalid choice, try again!\n");
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH14;
+                }
+                return;
+            }
+            Console.WriteLine("\nPlease, enter the last 8 digits of the other card numbers");
+            Console.Write("(4050 6070 XXXX XXXX): ");
+            string otherCardNumber = Console.ReadLine().Trim();
+            if (otherCardNumber.Length == 9)
+            {
+                BankCard otherBankCard = null;
+
                 foreach (var item in Bank.UserAccounts)
                 {
                     for(int i = 0; i < item.bankCards.Count; i++)
                     {
-                        if (item.bankCards[i].CardNumber == $"4050 6070 {cardNumber2}")
+                        if (item.bankCards[i].CardNumber == $"4050 6070 {otherCardNumber}")
                         {
-                            newBankCard2 = item.bankCards[i];
+                            otherBankCard = item.bankCards[i];
                             break;
                         }
                     }
                 }
 
-                if (newBankCard != null && newBankCard2 != null)
+                if (userBankCard != null && otherBankCard != null)
                 {
-                    Console.WriteLine($"\nHow much money do you want to transfer from {newBankCard.CardNumber} to {newBankCard2.CardNumber}");
+                    Console.WriteLine($"\nHow much money do you want to transfer from {userBankCard.CardNumber} to {otherBankCard.CardNumber}");
                 PATH15:
                     Console.WriteLine("\nWhich kind of currency type you want to be transfer?");
                     Console.WriteLine("1. AZN");
@@ -85,39 +109,39 @@ namespace BankConsoleApp.Models.User_Models
                                 {
                                     if (choice2 == 1 && choice3 == 1)
                                     {
-                                        TransferMethodsAZN.AZNToAZN(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsAZN.AZNToAZN(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 1 && choice3 == 2)
                                     {
-                                        TransferMethodsAZN.AZNToUSD(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsAZN.AZNToUSD(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 1 && choice3 == 3)
                                     {
-                                        TransferMethodsAZN.AZNToEUR(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsAZN.AZNToEUR(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 2 && choice3 == 1)
                                     {
-                                        TransferMethodsUSD.USDToAZN(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsUSD.USDToAZN(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 2 && choice3 == 2)
                                     {
-                                        TransferMethodsUSD.USDToUSD(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsUSD.USDToUSD(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 2 && choice3 == 3)
                                     {
-                                        TransferMethodsUSD.USDToEUR(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsUSD.USDToEUR(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 3 && choice3 == 1)
                                     {
-                                        TransferMethodsEUR.EURToAZN(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsEUR.EURToAZN(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 3 && choice3 == 2)
                                     {
-                                        TransferMethodsEUR.EURToUSD(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsEUR.EURToUSD(userBankCard, otherBankCard, currencyType);
                                     }
                                     else if (choice2 == 3 && choice3 == 3)
                                     {
-                                        TransferMethodsEUR.EURToEUR(newBankCard, newBankCard2, currencyType);
+                                        TransferMethodsEUR.EURToEUR(userBankCard, otherBankCard, currencyType);
                                     }
                                 }
                                 else

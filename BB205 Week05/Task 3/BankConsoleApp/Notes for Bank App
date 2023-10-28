@@ -6,12 +6,12 @@
 
 Ən son etdiklərim:
 
-- Vizaul hissədə başlanğıc menyuları qeyd edildi.
+- Vizual hissədə başlanğıc menyuları qeyd edildi.
 - Verilmiş class-lar, interface-lər, Enum-lar və Exceptionlar yaradıldı.
 
 Ediləcək olan işlər:
 
-- Vizaul bölüm tam bitməyib, onlar bitirilməlidir.
+- Vizual bölüm tam bitməyib, onlar bitirilməlidir.
 - User class-ı yaradıb hər bir karta əlavə edilməlidir.
 - Verilmiş Model-lərin, Interface-lərin, Exception-ların 
 içərisi tam doldurulmalıdır.
@@ -38,7 +38,7 @@ Ediləcək olan işlər:
 
 Ən son etdiklərim:
 - Verilmiş relationlar quruldu
-- Vizaul bölümdə yaranan problemlər düzəldi
+- Vizual bölümdə yaranan problemlər düzəldi
 - Metodların hamısı yazıldı
 - Proqramın işləmə prinsipləri tam şəkildə
 düzəldi
@@ -50,26 +50,47 @@ try-catch ilə yazmalısan
 - Kodu daha basit anlaşılar versiyaya gətirməyə
 çalış.
 
+28/10/2023 16:17 pm
+
+Ən son etdiklərim:
+- Yeni əlavə var, istifadəçinin yaşı əlavə olundu
+- Transfer ilə bağlı güncəlləmələr var
+- Proqramda artıq istifadəçilərin bank kartları var
+və onlar arasında transfer baş verə bilir.
+- Vizual hissələrdə yenilənmələr etdim
+- Proqramda yaranan bug-lar təmizləndi
+
+Ediləcək olan işlər:
+- Proqramı solid prinsiplərinə görə yığılmalıdır
+- Proqramda olan search alqoritmlərini daha da 
+optimallaşdırılmalıdı.
+- Əgər buglar varsa, onları düzəltmək lazımdı
+- Çatdıra bilsən JSON ilə statik Data yarat.
+
 --------------------------------------------------------------------------------------------
 
 					Console App Haqqında Məlumat
 
 Salam Ilkin Bank Console App-inə xoş gəlmisiniz
 Proqram işləyən zaman qarşımıza ilk menyumuz çıxır. Bu menyuda yalnız
-2 seçənək olur, bunlar,
+3 seçənək olur, bunlar,
 
-1. Sign up - Bu seçənək sayəsində artıq bir hesab yaradırsınız, və bu hesab
-daxilind artıq Bank əməliyyatlarınızı etməyə başlayırsınız
+1. Sign up - Bu seçənək vasitəsi ilə verilmiş Ilkin Bankda yeni bir hesab 
+yaradırsınız. Burada sizdən adınız(name), soyadınız(surname), yaşınız(age),
+mobil nömrəniz(phone number), poçt ünvanınız(email), şifrəniz(password), 
+bunlar istifadəçinin informasiyalarıdır, sonra isə bank kart informasiyaları
+daxil edilir, bunlar pin şifrəsi(pincode), hesab tipi(account type) və valyuta
+tipidir(currency type). Əgər informasiylar düzgün daxil edilərsə, bu zaman
+sizin üçün Bankda yeni bir hesab açılır və sonra ilk menyumuza dönərək sizdən
+hesabdan keçilməniz istənilir.
 
-2. Exit - Adından bəlli olduğu kimi proqramımızdan çıxmaq üçün istifadə
-olunur
+2. Sign in - Bu seçənək bizdən iki seçim istəyir bunlar mobil nömrə/poçt ünvanı
+və hesabın şifrəsidir. Burada ilk bölümdə istifadəçi öz mobil nömrəsini və ya 
+poçt ünvanını daxil edə bilər, sonra şifrəsini daxil edərək hesabı yoxlanılır.
+Əgər şərtlər düzgün olarsa, bu zaman hesab menyusu, yəni ikinci menyuyay keçid
+baş verir. Əks halda ilk menyuya geri qayıdır.
 
-"Sign up" bölümünü seçdikdən sonra proqram bizdən user informasiyaları
-daxil etməyimizi istəyir, bunlar, name, surname, phone number, email(Regex),
-password(Regex), account type, currency type və pincode. Bunlardan əlavə
-olaraq son 3 informasiya, hansı ki, bunlar kartımıza aid olan bilgilər olan
-card number, card expiration date və cvv infolarıdır. Bu son üç infolarımız
-öz-özünə bizim yerimizə yazılır.(Regex - regex işlədilib)
+0. Exit - Adından bəlli olduğu kimi proqramı dayandırır.
 
 Artıq qeydiyyatdan keçdiyimiz üçün qarşımıza "Welcome Name Surname" menyumuz
 çıxır. Burada artıq bir neçə seçənək var, hər bir seçənəyin özünə xas əlaməti
@@ -89,13 +110,15 @@ yenə çevrilmə arxada baş verir.
 
 3. History - Bu seçənək kartımıza olan deposit və withdraw-ların infosunu
 qeyd edir, hansı ki, bunlar transaction date time, transaction type
-(deposit/withdraw) və transaction amount-dır.
+(deposit/withdraw), transaction amount və currency type-dır(AZN, USD, EUR).
 
-4. Transfer - Transfer seçənəyi sayəsində kartlarımız arasında transfer
-gerçəkləşdiririk. Burada da valyuta tipinə və balans tipinə görə çevrilmə
-baş verir. İlk öncə bizdən hansı kartların arasında transfer olacağına
-görə kartların son 8 rəqəmlərini istəyir. Birinci kart başlanğıc nöqtə,
-ikinci kart isə son nöqtə olacaq. Və bu şəkildə transformasiya baş verir.
+4. Transfer - Bu seçənək ilk öncə qeydiyyatdan keçdiyimiz hesabın kartlarını 
+ekrana çıxarır və birini seçməyimizi istəyir. Hər hansı bir kartı seçdikdən 
+sonra pulu ötürəcəyimiz kartın son 8 nömrəsini daxil etməyimiz istənilir.
+Burada kartın son 8 nömrəsini daxil etdikdən sonra bizim qarşımıza köçürələcək
+pulun tipini seçməyimiz üçün bir menyu çıxır(AZN, USD, EUR). Burada seçim 
+etdikdən sonra kartın balansları arası seçim çıxır və son olaraq bizdən
+müəyyən bir miqdər pul istəyir.
 
 5. Accounts - Kartlarımızın bilgilərini ekrana çap edir.
 
@@ -114,14 +137,10 @@ balans ölçüsü dəyişir.
 9. Settings - Bu bölümdə User-un məlumatlarını dəyişmək olur. Əsas işlərdən biri
 olan Pincode-un dəyişilməsi burada baş verir.("Delete account" bölümündə lazım olur).
 
-0. Exit - Proqramın bitməsi üçün lazım olan seçənəkdir.
+10. Log out - Bu seçənək bizim hesabımızdan çıxmağımıza kömək edir. Bu seçim 
+sayəsində digər hesablarımıza daxil ola bilirik.
 
-Qısa qeyd:
-Proqramın valyuta və balans çevrilmə tiplərində balaca buglar ola bilər. Və 
-try-catchlərdən çox istifadə bilmədim lakin edəcəm, hətta yeni exception tipləri
-lazımdı, onları yaradıb yazacam. Transaction bölümünə də depositin valyuta tipini 
-də qeyd etmək istəyirəm. Sadəcə çox uzun müddətdi kod yazıram və beynim yanıb. 
-Əlimdən gəldiyi qədər düzəldəcəm və yeni funksiyalar əlavə edəcəm.
+0. Exit - Proqramın bitməsi üçün lazım olan seçənəkdir.
 
 Bank Console App-i İyi İşlətmələr :D
 

@@ -14,16 +14,18 @@ namespace BankConsoleApp.Models
         static int _id;
         internal protected string Name { get; set; }
         internal protected string Surname { get; set; }
+        internal protected byte Age { get; set; }
         internal protected string Email { get; set; }
         internal protected string Password { get; set; }
         internal protected string PhoneNumber { get; set; }
         internal protected List<BankCard> bankCards { get; set; }
 
-        public User(string name, string surname, string email, string password, string phoneNumber)
+        public User(string name, string surname, byte age ,string email, string password, string phoneNumber)
         {
             UserId = ++_id;
             Name = name;
             Surname = surname;
+            Age = age;
             Email = email;
             Password = password;
             PhoneNumber = phoneNumber;

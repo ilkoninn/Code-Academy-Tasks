@@ -30,9 +30,9 @@ namespace BankConsoleApp.Models
             UserAccounts = new List<User>();
         }
         
-        public static void Transfer()
+        public static void Transfer(User user)
         {
-            MoneyTransferCardToCard.Transfer();
+            MoneyTransferCardToCard.Transfer(user);
         }
         public void UserRegisterSection()
         {

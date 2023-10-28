@@ -12,7 +12,15 @@ namespace BankConsoleApp.Models.User_Models
         public static void AddCard(User user)
         {
             Console.WriteLine("\n\tAdd new account section\n");
-            AddAllInformation(user, AddAccountType(), AddCurrencyType(), AddPincode(user));
+            AccountType accountType = AddAccountType();
+            if (accountType == AccountType.Default) return;
+            CurrencyType currencyType = AddCurrencyType();
+            if (currencyType == CurrencyType.Default) return;
+            int pincode = AddPincode(user);
+            if (pincode == 0) return;
+
+            
+            AddAllInformation(user, accountType, currencyType, pincode);
             
         }
         public static AccountType AddAccountType()

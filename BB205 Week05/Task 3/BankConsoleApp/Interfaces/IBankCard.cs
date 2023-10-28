@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Interfaces
 {
-    internal interface IAccount
+    internal interface IBankCard
     {
         int AccountId { get; }
         decimal BalanceAZN { get; }

@@ -66,7 +66,7 @@ namespace BankConsoleApp
                     }
                     else
                     {
-                        Console.WriteLine("Invalid choice, you should be enter a number!");
+                        Console.WriteLine("\nInvalid choice, you should be enter a number!");
                     }
                 }
 
@@ -115,7 +115,7 @@ namespace BankConsoleApp
                     LoggedInUser.ListTransaction(LoggedInUser);                    
                     break;
                 case Operations.Transfer:
-                    Bank.Transfer();
+                    Bank.Transfer(LoggedInUser);
                     break;
                 case Operations.Cards:
                     LoggedInUser.ShowAllCards(LoggedInUser);

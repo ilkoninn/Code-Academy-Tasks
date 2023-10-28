@@ -1,6 +1,8 @@
 ﻿using BankConsoleApp.Enums;
+using BankConsoleApp.Exceptions.Registartion_Exceptions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,15 +17,19 @@ namespace BankConsoleApp.Models.Bank_Models
         public static void Register()
         {
             Console.WriteLine("\n\tRegistration section\n");
+            Console.WriteLine("\tUser information:\n");
             string name = UserSectionName();
             if (name == "") return;
             string surname = UserSectionSurname();
             if(surname == "") return;
+            byte age = UserSectionAge();
+            if (age == 0) return;
             string phoneNumber = UserSectionPhoneNumber();
             if (phoneNumber == "") return;
             string email = EmailSection();
             if (email == "") return;
             string password = PasswordSection();
+            Console.WriteLine("\n\tUser bank card information:");
             if (password == "") return;
             int pincode = PincodeSection();
             if (pincode == 0) return;
@@ -33,7 +39,7 @@ namespace BankConsoleApp.Models.Bank_Models
             if(currencyType == CurrencyType.Default) return;
 
             RegisterUserSection(
-                name, surname, phoneNumber, email, password, 
+                name, surname, age, phoneNumber, email, password, 
                 pincode, accountType, currencyType
             );
             
@@ -45,9 +51,9 @@ namespace BankConsoleApp.Models.Bank_Models
             Console.Write("Name: ");
             string name = Console.ReadLine().Trim();
 
-            if (!(name.Length >= 3))
+            if (!(name.Length >= 3 && char.IsUpper(name[0])))
             {
-                Console.WriteLine("\nName does not meet to criteria, length of name greater and equel than 3, try again! (Ex: Ilkin)\n");
+                Console.WriteLine("\nName does not meet to criteria, length of name greater and equel than 3 and the first letter should be uppercase, try again! (Ex: Ilkin)\n");
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -66,9 +72,9 @@ namespace BankConsoleApp.Models.Bank_Models
             Console.Write("Surname: ");
             string surname = Console.ReadLine().Trim();
 
-            if (!(surname.Length >= 3))
+            if (!(surname.Length >= 3 && char.IsUpper(surname[0])))
             {
-                Console.WriteLine("\nSurname does not meet to criteria, length of surname greater and equel than 3, try again! (Ex: Ilkin)\n");
+                Console.WriteLine("\nSurname does not meet to criteria, length of surname greater and equel than 3 and the first letter should be uppercase, try again! (Ex: Rajabov)\n");
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -80,6 +86,41 @@ namespace BankConsoleApp.Models.Bank_Models
 
             return surname;
         }
+        public static byte UserSectionAge()
+        {
+        // User information section
+        PATH9:
+            try
+            {
+                Console.Write("Age: ");
+                string age = Console.ReadLine().Trim();
+                byte checkedAge = 0;
+
+                if (byte.TryParse(age, out byte userAge))
+                {
+                    if ((userAge >= 18))
+                    {
+                        checkedAge = userAge;
+                    }
+                    else
+                    {
+                        throw new InvalidAgeException();
+                    }
+                }
+
+                return checkedAge;
+            }
+            catch (InvalidAgeException ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                return 0;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
         public static string UserSectionPhoneNumber()
         {
             // User information section
@@ -87,9 +128,9 @@ namespace BankConsoleApp.Models.Bank_Models
             Console.Write("Phone number(+994-XX-XXX-XX-XX): ");
             string phoneNumber = Console.ReadLine().Trim();
 
-            if (!(phoneNumber.Length <= 12 && phoneNumber.Length >= 9))
+            if (!(phoneNumber.Length < 13 && phoneNumber.Length > 8))
             {
-                Console.WriteLine("\nSurname does not meet to criteria, length of surname greater and equel than 3, try again! (Ex: Ilkin)\n");
+                Console.WriteLine("\nPhone number does not meet to criteria, length of phone number greater 8 and lower than 13, try again! (Ex: 70 660 00 17)\n");
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -133,7 +174,7 @@ namespace BankConsoleApp.Models.Bank_Models
 
             if (!regex2.IsMatch(password))
             {
-                Console.WriteLine("\nPassword does not meet the criteria!\nPassword must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, length should not be less than 8.\n");
+                Console.WriteLine("\nPassword does not meet the criteria!\nPassword must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, length should not be less than 8, try again! (Ex: Smth2000)\n");
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -244,7 +285,7 @@ namespace BankConsoleApp.Models.Bank_Models
 
             return 0;
         }
-        public static void RegisterUserSection(string name, string surname, string phoneNumber, string email, string password, int newPincode, AccountType userAccountType, CurrencyType userCurrencyType)
+        public static void RegisterUserSection(string name, string surname, byte age, string phoneNumber, string email, string password, int newPincode, AccountType userAccountType, CurrencyType userCurrencyType)
         {
             Random random = new Random();
 
@@ -253,17 +294,19 @@ namespace BankConsoleApp.Models.Bank_Models
             string formattedDate = expirationDate.ToString("MM/yy");
             int cvv = random.Next(100, 999);
 
-            User newUser = new User(name, surname, email, password, phoneNumber);
+            User newUser = new User(name, surname, age, email, password, phoneNumber);
             BankCard bankCard = new BankCard(newPincode, cardNumber, expirationDate, cvv, userAccountType, userCurrencyType);
 
             newUser.bankCards.Add(bankCard);
             Bank.UserAccounts.Add(newUser);
 
 
+            Console.WriteLine("\nYour new account successfully created, please log in!");
             Console.WriteLine($"\n\tYour new card information\n");
             Console.WriteLine($"Card number: {cardNumber}");
             Console.WriteLine($"Card expiration date: {formattedDate}");
             Console.WriteLine($"Card number: {cvv}");
+
         }
     }
 }
