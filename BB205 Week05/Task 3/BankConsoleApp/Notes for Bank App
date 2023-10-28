@@ -67,6 +67,27 @@ optimallaşdırılmalıdı.
 - Əgər buglar varsa, onları düzəltmək lazımdı
 - Çatdıra bilsən JSON ilə statik Data yarat.
 
+28/10/2023 19:54 pm
+
+Ən son etdiklərim:
+- Yeni exception-lar yaratdım, artıq daxil edilən
+yanlış infolara görə bəzi exceptionlar işləyəcək.
+- Vizual bölümdə yeni güncəlləmələr etdim.
+- İnformasiyaları check edən yeni bir Model 
+yaratdım buradakı class-lar müyyən infoları
+yoxlayacaq.
+- Bəzi buglar düzəldildi, yeni exceptionlarla
+yaranan buglar.
+
+Ediləcək olan işlər:
+- Proqramı solid prinsiplərinə görə yığılmalıdır,
+bəzi dəyişikliklər edildi, amma düz olub olmadığı
+tam bilinmir.
+- Proqramda olan search alqoritmlərini ayrıca metodlar
+yaradıldı, amma onları List-in metodlarına tökmək lazımdı
+- Əgər buglar varsa, onları düzəltmək lazımdı
+- Hələ ki Data JSON-a tökülməyib, onu etməyə çalış.
+
 --------------------------------------------------------------------------------------------
 
 					Console App Haqqında Məlumat

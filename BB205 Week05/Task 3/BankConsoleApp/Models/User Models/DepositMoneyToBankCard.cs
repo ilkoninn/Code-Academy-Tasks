@@ -1,4 +1,7 @@
 ﻿using BankConsoleApp.Enums;
+using BankConsoleApp.Exceptions.Bank_Exceptions;
+using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Models.Check_Information_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +15,7 @@ namespace BankConsoleApp.Models.User_Models
         public static void DepositMoney(User user)
         {
             Console.WriteLine("\n\tDeposit Money section\n");
+            PATH14:
             Console.WriteLine("Please, choose a card: ");
             Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
             int count = 0;
@@ -22,69 +26,73 @@ namespace BankConsoleApp.Models.User_Models
                 Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
             }
             Console.WriteLine("0. Exit");
-            PATH14:
             Console.Write($"\nUser choice(0-{count}): ");
             string userChoice = Console.ReadLine();
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
             {
-                if (choice <= count)
+                BankCard userBankCard = CheckBankInformation.GetBankCard(user, choice);
+                try
                 {
-                    BankCard newBankCard = null;
-                    for (int i = 0; i < user.bankCards.Count; i++)
+                    if (userBankCard != null)
                     {
-                        if (choice == i + 1)
-                        {
-                            newBankCard = user.bankCards[i];
-                            break;
-                        }
-                    }
                     PATH15:
-                    Console.WriteLine("\nWhich kind of currency type you want to be deposit?");
-                    Console.WriteLine("1. AZN");
-                    Console.WriteLine("2. USD");
-                    Console.WriteLine("3. EUR");
-                    Console.Write("User choice(1-3): ");
-                    string userChoice2 = Console.ReadLine();
-                    if (userChoice2 == "1" || userChoice2 == "2" || userChoice2 == "3")
-                    {
-                        if (Enums.CurrencyType.TryParse(userChoice2, out Enums.CurrencyType currencyType))
+                        Console.WriteLine("\nWhich kind of currency type you want to be deposit?");
+                        Console.WriteLine("1. AZN");
+                        Console.WriteLine("2. USD");
+                        Console.WriteLine("3. EUR");
+                        Console.Write("User choice(1-3): ");
+                        string userChoice2 = Console.ReadLine();
+                        if (userChoice2 == "1" || userChoice2 == "2" || userChoice2 == "3")
                         {
+                            if (Enums.CurrencyType.TryParse(userChoice2, out Enums.CurrencyType currencyType))
+                            {
 
                             PATH25:
-                            Console.WriteLine("\nWhich balance type do you want to be deposit?");
-                            Console.WriteLine("1. AZN Balance");
-                            Console.WriteLine("2. USD Balance");
-                            Console.WriteLine("3. EUR Balance");
-                            Console.Write("User choice(1-3): ");
-                            string userChoice4 = Console.ReadLine();
-                            if (userChoice4 == "1" || userChoice4 == "2" || userChoice4 == "3")
-                            {
-                                if (int.TryParse(userChoice4, out int choice2))
+                                Console.WriteLine("\nWhich balance type do you want to be deposit?");
+                                Console.WriteLine("1. AZN Balance");
+                                Console.WriteLine("2. USD Balance");
+                                Console.WriteLine("3. EUR Balance");
+                                Console.Write("User choice(1-3): ");
+                                string userChoice4 = Console.ReadLine();
+                                if (userChoice4 == "1" || userChoice4 == "2" || userChoice4 == "3")
                                 {
-                                    switch (choice2)
+                                    if (int.TryParse(userChoice4, out int choice2))
                                     {
-                                        case 0:
-                                            return;
-                                            break;
-                                        case 1:
-                                            DepositToAZNBalance(newBankCard, currencyType);
-                                            break;
-                                        case 2:
-                                            DepositToUSDBalance(newBankCard, currencyType);
-                                            break;
-                                        case 3:
-                                            DepositToEURBalance(newBankCard, currencyType);
-                                            break;
-                                        default:
-                                            Console.WriteLine("Invalid choice, try again!");
-                                            Console.Write("Continue?(Y/N): ");
-                                            string yesOrNo = Console.ReadLine().ToLower().Trim();
-                                            if (yesOrNo == "yes" || yesOrNo == "y")
-                                            {
-                                                goto PATH25;
-                                            }
-                                            break;
+                                        switch (choice2)
+                                        {
+                                            case 0:
+                                                return;
+                                                break;
+                                            case 1:
+                                                DepositToAZNBalance(userBankCard, currencyType);
+                                                break;
+                                            case 2:
+                                                DepositToUSDBalance(userBankCard, currencyType);
+                                                break;
+                                            case 3:
+                                                DepositToEURBalance(userBankCard, currencyType);
+                                                break;
+                                            default:
+                                                Console.WriteLine("Invalid choice, try again!");
+                                                Console.Write("Continue?(Y/N): ");
+                                                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                                                if (yesOrNo == "yes" || yesOrNo == "y")
+                                                {
+                                                    goto PATH25;
+                                                }
+                                                break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("\nInvalid choice, try again!\n");
+                                        Console.Write("Continue?(Y/N): ");
+                                        string yesOrNo = Console.ReadLine().ToLower().Trim();
+                                        if (yesOrNo == "yes" || yesOrNo == "y")
+                                        {
+                                            goto PATH25;
+                                        }
                                     }
                                 }
                                 else
@@ -105,7 +113,7 @@ namespace BankConsoleApp.Models.User_Models
                                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                                 if (yesOrNo == "yes" || yesOrNo == "y")
                                 {
-                                    goto PATH25;
+                                    goto PATH15;
                                 }
                             }
                         }
@@ -122,27 +130,37 @@ namespace BankConsoleApp.Models.User_Models
                     }
                     else
                     {
-                        Console.WriteLine("\nInvalid choice, try again!\n");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo == "yes" || yesOrNo == "y")
-                        {
-                            goto PATH15;
-                        }
+                        throw new BankCardNotFoundException();
                     }
                 }
-                else
+                catch (BankCardNotFoundException ex)
                 {
-                    Console.WriteLine("\nInvalid choice, try again!\n");
+                    Console.WriteLine(ex.Message);
                     Console.Write("Continue?(Y/N): ");
                     string yesOrNo = Console.ReadLine().ToLower().Trim();
                     if (yesOrNo == "yes" || yesOrNo == "y")
                     {
                         goto PATH14;
                     }
+                    else
+                    {
+                        return;
+                    }
                 }
-
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\n" + ex.Message);
+                    Console.Write("Continue?(Y/N): ");
+                    string yesOrNo = Console.ReadLine().ToLower().Trim();
+                    if (yesOrNo == "yes" || yesOrNo == "y")
+                    {
+                        goto PATH14;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
             }
             else
             {

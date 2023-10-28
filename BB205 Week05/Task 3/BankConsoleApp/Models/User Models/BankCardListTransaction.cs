@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BankConsoleApp.Exceptions.Bank_Exceptions;
+using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Models.Check_Information_Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +14,7 @@ namespace BankConsoleApp.Models.User_Models
         public static void ListTransactions(User user)
         {
             Console.WriteLine("\n\tTransaction list\n");
+        PATH26:
             Console.WriteLine("Please, choose a card: ");
             Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
             int count = 0;
@@ -21,40 +25,58 @@ namespace BankConsoleApp.Models.User_Models
                 Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
             }
             Console.WriteLine("0. Exit");
-            PATH26:
+
             Console.Write($"\nUser choice(0-{count}): ");
             string userChoice = Console.ReadLine();
+
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
             {
-                if (choice <= count)
+                BankCard userBankCard = CheckBankInformation.GetBankCard(user, choice);
+                try
                 {
-                    BankCard newBankCard = null;
-                    for (int i = 0; i < user.bankCards.Count; i++)
+                    if (userBankCard != null)
                     {
-                        if (choice == i + 1)
+                        Console.WriteLine($"\n\t{userBankCard.CardNumber} transaction list\n");
+                        foreach (var item in userBankCard.transactions) 
                         {
-                            newBankCard = user.bankCards[i];
-                            break;
+                            Console.WriteLine($"Transaction type: {item.TransactionType}\n" +
+                                $"Transaction date: {item.TransactionDate}\n" +
+                                $"Transaction amount: {item.Amount}\n" +
+                                $"Transaction currency type: {item.CurrencyType}\n");
                         }
                     }
-                    Console.WriteLine($"\n\t{newBankCard.CardNumber} transaction list\n");
-                    foreach (var item in newBankCard.transactions)
+                    else
                     {
-                        Console.WriteLine($"Transaction type: {item.TransactionType}\n" +
-                            $"Transaction date: {item.TransactionDate}\n" +
-                            $"Transaction amount: {item.Amount}\n" +
-                            $"Transaction currency type: {item.CurrencyType}\n");
+                        throw new BankCardNotFoundException();
                     }
                 }
-                else
+                catch (BankCardNotFoundException ex)
                 {
-                    Console.WriteLine("\nInvalid choice, try again!\n");
+                    Console.WriteLine(ex.Message);
                     Console.Write("Continue?(Y/N): ");
                     string yesOrNo = Console.ReadLine().ToLower().Trim();
                     if (yesOrNo == "yes" || yesOrNo == "y")
                     {
                         goto PATH26;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\n" + ex.Message);
+                    Console.Write("Continue?(Y/N): ");
+                    string yesOrNo = Console.ReadLine().ToLower().Trim();
+                    if (yesOrNo == "yes" || yesOrNo == "y")
+                    {
+                        goto PATH26;
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
             }

@@ -11,7 +11,7 @@ namespace BankConsoleApp.Models.User_Models
         public static void GetAllCards(User user)
         {
             Console.WriteLine("\n\tYour bank cards\n");
-            if(user.bankCards != null)
+            if(user.bankCards.Count != 0)
             {
                 Console.WriteLine("Card Number | Card CVV | Card expiration date\n");
 

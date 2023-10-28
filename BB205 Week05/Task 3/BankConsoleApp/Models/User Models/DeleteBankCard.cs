@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BankConsoleApp.Exceptions.Bank_Exceptions;
+using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Models.Check_Information_Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +14,7 @@ namespace BankConsoleApp.Models.User_Models
         public static void DeleteAccount(User user)
         {
             Console.WriteLine("\n\tDelete Account section\n");
+        PATH12:
             Console.WriteLine("Please, choose a card: ");
             Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
             int count = 0;
@@ -21,63 +25,103 @@ namespace BankConsoleApp.Models.User_Models
                 Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
             }
             Console.WriteLine("0. Exit");
-        PATH12:
             Console.Write($"\nUser choice(0-{count}): ");
             string userChoice = Console.ReadLine();
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
             {
-                if (choice <= count)
+                BankCard userBankCard = CheckBankInformation.GetBankCard(user, choice);
+                try
                 {
-                    BankCard newBankCard = null;
-                    for (int i = 0; i < user.bankCards.Count; i++)
+                    if (userBankCard != null)
                     {
-                        if (choice == i + 1)
+                    PATH13:
+                        Console.Write("Please, enter card's pincode: ");
+                        string userPincode = Console.ReadLine();
+                        try
                         {
-                            newBankCard = user.bankCards[i];
-                            break;
+                            if (CheckUserInformation.CheckPincode(userPincode))
+                            {
+                                if(userBankCard.Pincode == int.Parse(userPincode)) 
+                                {
+                                    user.bankCards.Remove(userBankCard);
+                                    Console.WriteLine("\nBank card successfully deleted!\n");
+                                }
+                                else
+                                {
+                                    throw new PincodeNotFoundException();
+                                }
+                            }
+                            else
+                            {
+                                throw new InvalidPincodeException();
+                            }
                         }
-                    }
-                PATH13:
-                    Console.Write("Please, enter card's pincode: ");
-                    string userPincode = Console.ReadLine();
-                    if (int.TryParse(userPincode, out int pincode) && userPincode.Length == 4)
-                    {
-                        if (newBankCard.Pincode == pincode)
+                        catch (PincodeNotFoundException ex)
                         {
-                            user.bankCards.Remove(newBankCard);
-                            Console.WriteLine("\nBank card successfully deleted!\n");
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nThis card's pincode is not like that!\n");
+                            Console.WriteLine(ex.Message);
                             Console.Write("Continue?(Y/N): ");
                             string yesOrNo = Console.ReadLine().ToLower().Trim();
                             if (yesOrNo == "yes" || yesOrNo == "y")
                             {
                                 goto PATH13;
                             }
+                            return;
+                        }
+                        catch (InvalidPincodeException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH13;
+                            }
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("\n" + ex.Message);
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH13;
+                            }
+                            return;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("\nInvalid choice, try again!\n");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo == "yes" || yesOrNo == "y")
-                        {
-                            goto PATH13;
-                        }
+                        throw new BankCardNotFoundException();
                     }
                 }
-                else
+                catch (BankCardNotFoundException ex)
                 {
-                    Console.WriteLine("\nInvalid choice, try again!\n");
+                    Console.WriteLine(ex.Message);
                     Console.Write("Continue?(Y/N): ");
                     string yesOrNo = Console.ReadLine().ToLower().Trim();
                     if (yesOrNo == "yes" || yesOrNo == "y")
                     {
                         goto PATH12;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\n" + ex.Message);
+                    Console.Write("Continue?(Y/N): ");
+                    string yesOrNo = Console.ReadLine().ToLower().Trim();
+                    if (yesOrNo == "yes" || yesOrNo == "y")
+                    {
+                        goto PATH12;
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
             }

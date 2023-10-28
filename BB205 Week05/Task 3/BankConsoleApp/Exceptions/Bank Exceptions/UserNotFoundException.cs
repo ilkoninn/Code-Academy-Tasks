@@ -8,6 +8,6 @@ namespace BankConsoleApp.Exceptions
 {
     internal class UserNotFoundException:Exception
     {
-        public UserNotFoundException(string message="There is no such a user in Bank!"):base(message) { }
+        public UserNotFoundException(string message="\nThere is no such a user in Bank!\n"):base(message) { }
     }
 }

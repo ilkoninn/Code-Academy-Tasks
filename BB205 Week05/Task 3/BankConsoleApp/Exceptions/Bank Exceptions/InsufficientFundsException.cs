@@ -8,6 +8,6 @@ namespace BankConsoleApp.Exceptions
 {
     internal class InsufficientFundsException:Exception
     {
-        public InsufficientFundsException(string message):base(message) { }
+        public InsufficientFundsException(string message = "There are no funds on your card equal to the amount entered") :base(message) { }
     }
 }

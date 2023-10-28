@@ -1,5 +1,7 @@
 ﻿using BankConsoleApp.Enums;
 using BankConsoleApp.Exceptions.Registartion_Exceptions;
+using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Models.Check_Information_Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +19,7 @@ namespace BankConsoleApp.Models.Bank_Models
         public static void Register()
         {
             Console.WriteLine("\n\tRegistration section\n");
-            Console.WriteLine("\tUser information:\n");
+            Console.WriteLine("User information:\n");
             string name = UserSectionName();
             if (name == "") return;
             string surname = UserSectionSurname();
@@ -29,7 +31,7 @@ namespace BankConsoleApp.Models.Bank_Models
             string email = EmailSection();
             if (email == "") return;
             string password = PasswordSection();
-            Console.WriteLine("\n\tUser bank card information:");
+            Console.WriteLine("\nUser bank card information:");
             if (password == "") return;
             int pincode = PincodeSection();
             if (pincode == 0) return;
@@ -51,9 +53,20 @@ namespace BankConsoleApp.Models.Bank_Models
             Console.Write("Name: ");
             string name = Console.ReadLine().Trim();
 
-            if (!(name.Length >= 3 && char.IsUpper(name[0])))
+            try
             {
-                Console.WriteLine("\nName does not meet to criteria, length of name greater and equel than 3 and the first letter should be uppercase, try again! (Ex: Ilkin)\n");
+                if (CheckUserInformation.CheckName(name))
+                {
+                    return name;
+                }
+                else
+                {
+                    throw new InvalidNameException();
+                }
+            }
+            catch (InvalidNameException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -62,8 +75,17 @@ namespace BankConsoleApp.Models.Bank_Models
                 }
                 return "";
             }
-
-            return name;
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH6;
+                }
+                return "";
+            }
         }
         public static string UserSectionSurname()
         {
@@ -72,9 +94,20 @@ namespace BankConsoleApp.Models.Bank_Models
             Console.Write("Surname: ");
             string surname = Console.ReadLine().Trim();
 
-            if (!(surname.Length >= 3 && char.IsUpper(surname[0])))
+            try
             {
-                Console.WriteLine("\nSurname does not meet to criteria, length of surname greater and equel than 3 and the first letter should be uppercase, try again! (Ex: Rajabov)\n");
+                if (CheckUserInformation.CheckSurname(surname))
+                {
+                    return surname;
+                }
+                else
+                {
+                    throw new InvalidSurnameException();
+                }
+            }
+            catch (InvalidSurnameException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -83,41 +116,43 @@ namespace BankConsoleApp.Models.Bank_Models
                 }
                 return "";
             }
-
-            return surname;
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH7;
+                }
+                return "";
+            }
         }
         public static byte UserSectionAge()
         {
-        // User information section
-        PATH9:
+            // User information section
+            PATH9:
+            Console.Write("Age: ");
+            string age = Console.ReadLine().Trim();
             try
             {
-                Console.Write("Age: ");
-                string age = Console.ReadLine().Trim();
-                byte checkedAge = 0;
-
-                if (byte.TryParse(age, out byte userAge))
+                if (CheckUserInformation.CheckAge(age))
                 {
-                    if ((userAge >= 18))
-                    {
-                        checkedAge = userAge;
-                    }
-                    else
-                    {
-                        throw new InvalidAgeException();
-                    }
+                    return byte.Parse(age);
                 }
-
-                return checkedAge;
+                else
+                {
+                    throw new InvalidAgeException();
+                }
             }
             catch (InvalidAgeException ex)
             {
-                Console.WriteLine("\n" + ex.Message);
+                Console.WriteLine(ex.Message);
                 return 0;
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("\n" + ex.Message);
                 return 0;
             }
         }
@@ -128,9 +163,20 @@ namespace BankConsoleApp.Models.Bank_Models
             Console.Write("Phone number(+994-XX-XXX-XX-XX): ");
             string phoneNumber = Console.ReadLine().Trim();
 
-            if (!(phoneNumber.Length < 13 && phoneNumber.Length > 8))
+            try
             {
-                Console.WriteLine("\nPhone number does not meet to criteria, length of phone number greater 8 and lower than 13, try again! (Ex: 70 660 00 17)\n");
+                if (CheckUserInformation.CheckPhoneNumber(phoneNumber))
+                {
+                    return phoneNumber;
+                }
+                else
+                {
+                    throw new InvalidPhoneNumberException();
+                }
+            }
+            catch (InvalidPhoneNumberException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -139,8 +185,17 @@ namespace BankConsoleApp.Models.Bank_Models
                 }
                 return "";
             }
-
-            return phoneNumber;
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH8;
+                }
+                return "";
+            }
         }
         public static string EmailSection()
         {
@@ -148,11 +203,31 @@ namespace BankConsoleApp.Models.Bank_Models
             PATH1:
             Console.Write("Email: ");
             string email = Console.ReadLine().Trim();
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-
-            if (!regex.IsMatch(email))
+            try
             {
-                Console.WriteLine("\nEmail does not meet to criteria, try again! (Ex: something@someth.ing)\n");
+                if (CheckUserInformation.CheckEmail(email))
+                {
+                    return email;
+                }
+                else
+                {
+                    throw new InvalidEmailException();
+                }
+            }
+            catch (InvalidEmailException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH1;
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -162,7 +237,6 @@ namespace BankConsoleApp.Models.Bank_Models
                 return "";
             }
 
-            return email;
         }
         public static string PasswordSection()
         {
@@ -170,11 +244,20 @@ namespace BankConsoleApp.Models.Bank_Models
             PATH2:
             Console.Write("Password: ");
             string password = Console.ReadLine().Trim();
-            Regex regex2 = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
-
-            if (!regex2.IsMatch(password))
+            try
             {
-                Console.WriteLine("\nPassword does not meet the criteria!\nPassword must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, length should not be less than 8, try again! (Ex: Smth2000)\n");
+                if (CheckUserInformation.CheckPassword(password))
+                {
+                    return password;
+                }
+                else
+                {
+                    throw new InvalidPasswordException();
+                }
+            }
+            catch (InvalidPasswordException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
@@ -183,8 +266,17 @@ namespace BankConsoleApp.Models.Bank_Models
                 }
                 return "";
             }
-
-            return password;
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH2;
+                }
+                return "";
+            }
         }
         public static AccountType AccountTypeSection()
         {
@@ -265,25 +357,40 @@ namespace BankConsoleApp.Models.Bank_Models
             PATH3:
             Console.Write("\nPincode(Ex: 0000): ");
             string pincode = Console.ReadLine().Trim();
-            int userPincode;
-
-            if (pincode.Length == 4 && int.TryParse(pincode, out int newPincode))
+            try
             {
-                userPincode = newPincode;
-                return userPincode;
+                if (CheckUserInformation.CheckPincode(pincode))
+                {
+                    return int.Parse(pincode);
+                }
+                else
+                {
+                    throw new InvalidPincodeException();
+                }
             }
-            else
+            catch (InvalidPincodeException ex)
             {
-                Console.WriteLine("\nPincode length must be equel to 4 and all input contains from numbers!\n");
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
                 {
                     goto PATH3;
                 }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH3;
+                }
+                return 0;
             }
 
-            return 0;
         }
         public static void RegisterUserSection(string name, string surname, byte age, string phoneNumber, string email, string password, int newPincode, AccountType userAccountType, CurrencyType userCurrencyType)
         {

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BankConsoleApp.Exceptions;
+using BankConsoleApp.Exceptions.Bank_Exceptions;
+using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Models.Check_Information_Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +15,7 @@ namespace BankConsoleApp.Models.User_Models
     {
         public static void UserSettings(User user)
         {
-            PATH2:
+        PATH2:
             Console.WriteLine("\n\tSettings section\n");
             Console.WriteLine("1. Update name");
             Console.WriteLine("2. Update surname");
@@ -25,7 +29,7 @@ namespace BankConsoleApp.Models.User_Models
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
             {
-                if (choice <= 8)
+                if (choice <= 6)
                 {
                     switch (choice)
                     {
@@ -48,6 +52,7 @@ namespace BankConsoleApp.Models.User_Models
                             UpdateCardPincode(user);
                             break;
                     }
+                    goto PATH2;
                 }
                 else
                 {
@@ -72,81 +77,213 @@ namespace BankConsoleApp.Models.User_Models
             }
 
         }
-
         public static void UpdateName(User user)
         {
+        PATH1:
             Console.WriteLine($"\nYour name: {user.Name}");
             Console.Write("Please, enter your new name: ");
             string name = Console.ReadLine().Trim();
-            user.Name = name;
-            Console.WriteLine("Your name has been changed!");
-        }
-        public static void UpdateSurname(User user)
-        {
-            Console.WriteLine($"\nYour surname: {user.Surname}");
-            Console.Write("Please, enter your new surname: ");
-            string surname = Console.ReadLine().Trim();
-            user.Surname = surname;
-            Console.WriteLine("Your surname has been changed!");
-        }
-        public static void UpdateEmail(User user)
-        {
-            PATH3:
-            Console.WriteLine($"\nYour email: {user.Email}");
-            Console.Write("Please, enter your new email: ");
-            string email = Console.ReadLine().Trim();
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-
-            if (!regex.IsMatch(email))
+            try
             {
-                Console.WriteLine("\nEmail does not meet to criteria, try again! (Ex: something@someth.ing)\n");
+                if (CheckUserInformation.CheckName(name))
+                {
+                    user.Name = name;
+                    Console.WriteLine("Your name has been changed!");
+                }
+                else
+                {
+                    throw new InvalidNameException();
+                }
+            }
+            catch (InvalidNameException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
                 {
-                    goto PATH3;
+                    goto PATH1;
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH1;
+                }
+                return;
+            }
+        }
+        public static void UpdateSurname(User user)
+        {
+        PATH2:
+            Console.WriteLine($"\nYour surname: {user.Surname}");
+            Console.Write("Please, enter your new surname: ");
+            string surname = Console.ReadLine().Trim();
+            try
+            {
+                if (CheckUserInformation.CheckSurname(surname))
+                {
+                    user.Surname = surname;
+                    Console.WriteLine("Your surname has been changed!");
+
                 }
                 else
                 {
-                    return;
+                    throw new InvalidSurnameException();
                 }
             }
-
-            user.Email = email;
-            Console.WriteLine("Your email has been changed!");
-        }
-        public static void UpdatePassword(User user)
-        {
-            PATH4:
-            Console.Write("Please, enter your new password: ");
-            string password = Console.ReadLine().Trim();
-            Regex regex2 = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
-
-            if (!regex2.IsMatch(password))
+            catch (InvalidSurnameException ex)
             {
-                Console.WriteLine("\nPassword does not meet the criteria!\nPassword must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, length should not be less than 8.\n");
+                Console.WriteLine(ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH2;
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH2;
+                }
+                return;
+            }
+        }
+        public static void UpdateEmail(User user)
+        {
+        PATH4:
+            Console.WriteLine($"\nYour email: {user.Email}");
+            Console.Write("Please, enter your new email: ");
+            string email = Console.ReadLine().Trim();
+            try
+            {
+                if (CheckUserInformation.CheckEmail(email))
+                {
+                    user.Email = email;
+                    Console.WriteLine("Your email has been changed!");
+
+                }
+                else
+                {
+                    throw new InvalidEmailException();
+                }
+            }
+            catch (InvalidEmailException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.Write("Continue?(Y/N): ");
                 string yesOrNo = Console.ReadLine().ToLower().Trim();
                 if (yesOrNo == "yes" || yesOrNo == "y")
                 {
                     goto PATH4;
                 }
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH4;
+                }
+                return;
+            }
+        }
+        public static void UpdatePassword(User user)
+        {
+        PATH5:
+            Console.Write("Please, enter your new password: ");
+            string password = Console.ReadLine().Trim();
+            try
+            {
+                if (CheckUserInformation.CheckPassword(password))
+                {
+                    user.Password = password;
+                    Console.WriteLine("Your password has been changed!");
+
+                }
                 else
                 {
-                    return;
+                    throw new InvalidPasswordException();
                 }
             }
-
-            user.Password = password;
-            Console.WriteLine("Your password has been changed!");
+            catch (InvalidPasswordException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH5;
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH5;
+                }
+                return;
+            }
         }
         public static void UpdatePhoneNumber(User user)
         {
+        PATH3:
             Console.WriteLine($"\nYour phone number: {user.PhoneNumber}");
             Console.Write("Please, enter your new phone number(+994-XX-XXX-XX-XX): ");
             string phoneNumber = Console.ReadLine().Trim();
-            user.PhoneNumber = phoneNumber;
-            Console.WriteLine("Your phone number has been changed!");
+            try
+            {
+                if (CheckUserInformation.CheckPhoneNumber(phoneNumber))
+                {
+                    user.PhoneNumber = phoneNumber;
+                    Console.WriteLine("Your phone number has been changed!");
+
+                }
+                else
+                {
+                    throw new InvalidPhoneNumberException();
+                }
+            }
+            catch (InvalidPhoneNumberException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH3;
+                }
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message);
+                Console.Write("Continue?(Y/N): ");
+                string yesOrNo = Console.ReadLine().ToLower().Trim();
+                if (yesOrNo == "yes" || yesOrNo == "y")
+                {
+                    goto PATH3;
+                }
+                return;
+            }
         }
         public static void UpdateCardPincode(User user)
         {
@@ -161,47 +298,77 @@ namespace BankConsoleApp.Models.User_Models
                 Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
             }
             Console.WriteLine("0. Exit");
+
             Console.Write($"\nUser choice(0-{count}): ");
             string userChoice2 = Console.ReadLine();
+
             if (userChoice2 == "0") return;
             if (int.TryParse(userChoice2, out int choice2))
             {
-                if (choice2 <= count)
+                BankCard userBankCard = CheckBankInformation.GetBankCard(user, choice2);
+                try
                 {
-                    BankCard newBankCard = null;
-                    for (int i = 0; i < user.bankCards.Count; i++)
+                    if (userBankCard != null)
                     {
-                        if (choice2 == i + 1)
+                    PATH6:
+                        Console.Write("Please, enter your new pincode: ");
+                        string pincode = Console.ReadLine().Trim();
+                        try
                         {
-                            newBankCard = user.bankCards[i];
-                            break;
+                            if (CheckUserInformation.CheckPincode(pincode))
+                            {
+                                userBankCard.Pincode = int.Parse(pincode);
+                            }
+                            else
+                            {
+                                throw new InvalidPincodeException();
+                            }
                         }
-                    }
-                    Console.Write("Please, enter your new pincode: ");
-                    string pincode = Console.ReadLine().Trim();
-                    if (pincode.Length == 4 && int.TryParse(pincode, out int newPincode))
-                    {
-                        newBankCard.Pincode = newPincode;
-                        Console.WriteLine("Your pincode has been changed!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nInvalid choice, try again!\n");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo == "yes" || yesOrNo == "y")
+                        catch (InvalidPincodeException ex)
                         {
-                            goto PATH5;
+                            Console.WriteLine(ex.Message);
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH6;
+                            }
+                            return;
                         }
-                        else
+                        catch (Exception ex)
                         {
+                            Console.WriteLine("\n" + ex.Message);
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH6;
+                            }
                             return;
                         }
                     }
+                    else
+                    {
+                        throw new BankCardNotFoundException();
+                    }
                 }
-                else
+                catch (BankCardNotFoundException ex)
                 {
-                    Console.WriteLine("\nInvalid choice, try again!\n");
+                    Console.WriteLine(ex.Message);
+                    Console.Write("Continue?(Y/N): ");
+                    string yesOrNo = Console.ReadLine().ToLower().Trim();
+                    if (yesOrNo == "yes" || yesOrNo == "y")
+                    {
+                        goto PATH5;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\n" + ex.Message);
                     Console.Write("Continue?(Y/N): ");
                     string yesOrNo = Console.ReadLine().ToLower().Trim();
                     if (yesOrNo == "yes" || yesOrNo == "y")
