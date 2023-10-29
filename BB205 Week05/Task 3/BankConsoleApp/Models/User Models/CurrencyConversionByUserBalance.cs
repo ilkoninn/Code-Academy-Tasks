@@ -15,18 +15,8 @@ namespace BankConsoleApp.Models.User_Models
         public static void CurrencyConversion(User user)
         {
             Console.WriteLine("\n\tCurrency conversion section\n");
-            PATH40:
-            Console.WriteLine("Please, choose a card: ");
-            Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
-            int count = 0;
-            foreach (var item in user.bankCards)
-            {
-                count++;
-                string formattedDate = item.ExpirationDate.ToString("MM/yy");
-                Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
-            }
-            Console.WriteLine("0. Exit");
-            Console.Write($"\nUser choice(0-{count}): ");
+        PATH40:
+            CheckBankInformation.GetCards(user);
             string userChoice = Console.ReadLine();
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
@@ -49,7 +39,7 @@ namespace BankConsoleApp.Models.User_Models
                         if (userChoice2 == "1" || userChoice2 == "2" || userChoice2 == "3" ||
                             userChoice2 == "4" || userChoice2 == "5" || userChoice2 == "6")
                         {
-                            ConversionType(userBankCard, userChoice2);
+                            ConversionType(user, userBankCard, userChoice2);
                         }
                         else
                         {
@@ -108,27 +98,27 @@ namespace BankConsoleApp.Models.User_Models
             }
         }
 
-        public static void ConversionType(BankCard bankCard,string userChoice)
+        public static void ConversionType(User user, BankCard bankCard,string userChoice)
         {
             switch (userChoice)
             {
                 case "1":
-                    CurrencyConversionMoneyToMoney.FromAZNToUSD(bankCard);
+                    CurrencyConversionMoneyToMoney.FromAZNToUSD(user, bankCard);
                     break;
                 case "2":
-                    CurrencyConversionMoneyToMoney.FromAZNToEUR(bankCard);
+                    CurrencyConversionMoneyToMoney.FromAZNToEUR(user, bankCard);
                     break;
                 case "3":
-                    CurrencyConversionMoneyToMoney.FromUSDToAZN(bankCard);
+                    CurrencyConversionMoneyToMoney.FromUSDToAZN(user, bankCard);
                     break;
                 case "4":
-                    CurrencyConversionMoneyToMoney.FromUSDToEUR(bankCard);
+                    CurrencyConversionMoneyToMoney.FromUSDToEUR(user, bankCard);
                     break;
                 case "5":
-                    CurrencyConversionMoneyToMoney.FromEURToAZN(bankCard);
+                    CurrencyConversionMoneyToMoney.FromEURToAZN(user, bankCard);
                     break;
                 case "6":
-                    CurrencyConversionMoneyToMoney.FromEURToUSD(bankCard);
+                    CurrencyConversionMoneyToMoney.FromEURToUSD(user, bankCard);
                     break;
             }
         }

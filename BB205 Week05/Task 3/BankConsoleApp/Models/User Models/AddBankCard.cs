@@ -1,5 +1,6 @@
 ﻿using BankConsoleApp.Enums;
 using BankConsoleApp.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -153,17 +154,39 @@ namespace BankConsoleApp.Models.User_Models
             Random random = new Random();
 
             string cardNumber = $"4050 6070 {random.Next(1000, 9999)} {random.Next(1000, 9999)}";
-            DateTime expirationDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime expirationDate = new DateTime(DateTime.Now.Year + 3, DateTime.Now.Month, 1);
             string formattedDate = expirationDate.ToString("MM/yy");
             int cvv = random.Next(100, 999);
 
             BankCard bankCard = new BankCard(pincode, cardNumber, expirationDate, cvv, accountType, currencyType);
-            user.bankCards.Add(bankCard);
+            AddBankCardToUserData(user, bankCard);
 
             Console.WriteLine($"\n\tYour new card information\n");
             Console.WriteLine($"Card number: {cardNumber}");
             Console.WriteLine($"Card expiration date: {formattedDate}");
             Console.WriteLine($"Card number: {cvv}");
+        }
+        public static void AddBankCardToUserData(User user, BankCard bankCard)
+        {
+            string result;
+            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+
+            using (StreamReader sr = new StreamReader(userJSONPath))
+            {
+                result = sr.ReadToEnd();
+            };
+
+            var deserializeJson = JsonConvert.DeserializeObject<List<User>>(result);
+
+            var addBankCardUser = deserializeJson.Find(u => u.UserId == user.UserId);
+            addBankCardUser.bankCards.Add(bankCard);
+
+            var serializeJson = JsonConvert.SerializeObject(deserializeJson);
+
+            using (StreamWriter sw = new StreamWriter(userJSONPath))
+            {
+                sw.WriteLine(serializeJson);
+            }
         }
     }
 }

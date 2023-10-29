@@ -10,8 +10,7 @@ namespace BankConsoleApp.Models
 {
     internal class Transaction
     {
-        public int TransactionId { get; set; }
-        static int count;
+        public Guid TransactionId { get; set; }
         public decimal Amount { get; set;  }
         public DateTime TransactionDate { get; set; }
         public Enums.Operations TransactionType { get; set; }
@@ -23,7 +22,7 @@ namespace BankConsoleApp.Models
             TransactionDate = transactionDate;
             TransactionType = transactionType;
             CurrencyType = currencyType;
-            TransactionId = ++count;
+            TransactionId = Guid.NewGuid();
         }
 
     }

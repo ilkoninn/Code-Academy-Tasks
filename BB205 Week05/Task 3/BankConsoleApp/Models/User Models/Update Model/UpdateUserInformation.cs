@@ -1,6 +1,9 @@
 ﻿using BankConsoleApp.Exceptions.Bank_Exceptions;
 using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Interfaces;
 using BankConsoleApp.Models.Check_Information_Models;
+using BankConsoleApp.Models.User_Models.Update_Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +24,7 @@ namespace BankConsoleApp.Models.User_Models
             {
                 if (CheckUserInformation.CheckName(name))
                 {
-                    user.Name = name;
+                    ChangeUserInfomation.UpdateName(user, name);
                     Console.WriteLine("Your name has been changed!");
                 }
                 else
@@ -62,7 +65,7 @@ namespace BankConsoleApp.Models.User_Models
             {
                 if (CheckUserInformation.CheckSurname(surname))
                 {
-                    user.Surname = surname;
+                    ChangeUserInfomation.UpdateSurname(user, surname);
                     Console.WriteLine("Your surname has been changed!");
 
                 }
@@ -104,9 +107,8 @@ namespace BankConsoleApp.Models.User_Models
             {
                 if (CheckUserInformation.CheckEmail(email))
                 {
-                    user.Email = email;
+                    ChangeUserInfomation.UpdateEmail(user, email);
                     Console.WriteLine("Your email has been changed!");
-
                 }
                 else
                 {
@@ -145,9 +147,8 @@ namespace BankConsoleApp.Models.User_Models
             {
                 if (CheckUserInformation.CheckPassword(password))
                 {
-                    user.Password = password;
+                    ChangeUserInfomation.UpdatePassword(user, password);
                     Console.WriteLine("Your password has been changed!");
-
                 }
                 else
                 {
@@ -187,7 +188,7 @@ namespace BankConsoleApp.Models.User_Models
             {
                 if (CheckUserInformation.CheckPhoneNumber(phoneNumber))
                 {
-                    user.PhoneNumber = phoneNumber;
+                    ChangeUserInfomation.UpdatePhoneNumber(user, phoneNumber);
                     Console.WriteLine("Your phone number has been changed!");
 
                 }
@@ -222,18 +223,7 @@ namespace BankConsoleApp.Models.User_Models
         public static void UpdateCardPincode(User user)
         {
         PATH5:
-            Console.WriteLine("Please, choose a card: ");
-            Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
-            int count = 0;
-            foreach (var item in user.bankCards)
-            {
-                count++;
-                string formattedDate = item.ExpirationDate.ToString("MM/yy");
-                Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
-            }
-            Console.WriteLine("0. Exit");
-
-            Console.Write($"\nUser choice(0-{count}): ");
+            CheckBankInformation.GetCards(user);
             string userChoice2 = Console.ReadLine();
 
             if (userChoice2 == "0") return;
@@ -251,7 +241,9 @@ namespace BankConsoleApp.Models.User_Models
                         {
                             if (CheckUserInformation.CheckPincode(pincode))
                             {
-                                userBankCard.Pincode = int.Parse(pincode);
+                                ChangeUserInfomation.UpdatePincode(user, userBankCard, int.Parse(pincode));
+                                Console.WriteLine("\nYour bank card's pincode has been changed!\n");
+
                             }
                             else
                             {
@@ -331,5 +323,6 @@ namespace BankConsoleApp.Models.User_Models
             }
 
         }
+
     }
 }

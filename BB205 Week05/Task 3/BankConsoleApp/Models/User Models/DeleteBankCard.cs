@@ -1,6 +1,7 @@
 ﻿using BankConsoleApp.Exceptions.Bank_Exceptions;
 using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
 using BankConsoleApp.Models.Check_Information_Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,7 @@ namespace BankConsoleApp.Models.User_Models
         {
             Console.WriteLine("\n\tDelete Account section\n");
         PATH12:
-            Console.WriteLine("Please, choose a card: ");
-            Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
-            int count = 0;
-            foreach (var item in user.bankCards)
-            {
-                count++;
-                string formattedDate = item.ExpirationDate.ToString("MM/yy");
-                Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
-            }
-            Console.WriteLine("0. Exit");
-            Console.Write($"\nUser choice(0-{count}): ");
+            CheckBankInformation.GetCards(user);
             string userChoice = Console.ReadLine();
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
@@ -44,7 +35,7 @@ namespace BankConsoleApp.Models.User_Models
                             {
                                 if(userBankCard.Pincode == int.Parse(userPincode)) 
                                 {
-                                    user.bankCards.Remove(userBankCard);
+                                    RemoveBankCard(user, userBankCard);
                                     Console.WriteLine("\nBank card successfully deleted!\n");
                                 }
                                 else
@@ -135,6 +126,29 @@ namespace BankConsoleApp.Models.User_Models
                     goto PATH12;
                 }
             }
+        }
+        public static void RemoveBankCard(User user, BankCard bankCard)
+        {
+            string result;
+            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+
+            using (StreamReader sr = new StreamReader(userJSONPath))
+            {
+                result = sr.ReadToEnd();
+            };
+
+            var deserializeJson = JsonConvert.DeserializeObject<List<User>>(result);
+
+            User newUser = deserializeJson.Find(u => u.UserId == user.UserId);
+            newUser.bankCards.Remove(newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId));
+
+            var serializeJson = JsonConvert.SerializeObject(deserializeJson);
+
+            using (StreamWriter sw = new StreamWriter(userJSONPath))
+            {
+                sw.WriteLine(serializeJson);
+            }
+
         }
     }
 }

@@ -9,7 +9,7 @@ namespace BankConsoleApp.Interfaces
 {
     internal interface IBankCard
     {
-        int AccountId { get; }
+        Guid AccountId { get; }
         int Pincode { get; set; }
         string CardNumber { get; set; }
         DateTime ExpirationDate { get; set; }

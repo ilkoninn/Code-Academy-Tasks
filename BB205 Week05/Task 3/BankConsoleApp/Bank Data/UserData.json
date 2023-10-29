@@ -1,0 +1,65 @@
+[
+  {
+    "UserId": "6a51cdbe-604f-4693-b946-a903b60f2e2d",
+    "Name": "Miraga",
+    "Surname": "Rajabov",
+    "Age": 19,
+    "Email": "ilkin@gmail.com",
+    "Password": "Ilkin2004",
+    "PhoneNumber": "70 660 00 17",
+    "bankCards": [
+      {
+        "transactions": [
+          {
+            "TransactionId": "a132f266-3bc9-45e6-a1df-7d739272d657",
+            "Amount": 200.0,
+            "TransactionDate": "2023-10-30T02:09:30.5536497+04:00",
+            "TransactionType": 1,
+            "CurrencyType": 2
+          },
+          {
+            "TransactionId": "1de2d067-e5e9-4c1c-a3d3-49d842f816fb",
+            "Amount": 100.0,
+            "TransactionDate": "2023-10-30T02:10:35.8489143+04:00",
+            "TransactionType": 2,
+            "CurrencyType": 2
+          }
+        ],
+        "Pincode": 3000,
+        "AccountId": "0b8304b9-4e95-4c53-9ca6-c1ba62999b2b",
+        "CardNumber": "4050 6070 9997 1209",
+        "ExpirationDate": "2026-10-01T00:00:00",
+        "CVV": 246,
+        "BalanceAZN": 750.0,
+        "BalanceUSD": 100.0,
+        "BalanceEUR": 20.0,
+        "AccountType": 2,
+        "CurrencyType": 2
+      }
+    ]
+  },
+  {
+    "UserId": "abd1614f-313c-464d-9377-41c2e0880f7f",
+    "Name": "Ilkin",
+    "Surname": "Eliyev",
+    "Age": 19,
+    "Email": "mir@gmail.com",
+    "Password": "Mira2004",
+    "PhoneNumber": "70 600 10 11",
+    "bankCards": [
+      {
+        "transactions": [],
+        "Pincode": 3000,
+        "AccountId": "85e91031-93a2-4e21-ad63-29d435605e12",
+        "CardNumber": "4050 6070 9754 1012",
+        "ExpirationDate": "2026-10-01T00:00:00",
+        "CVV": 753,
+        "BalanceAZN": 0.0,
+        "BalanceUSD": 0.0,
+        "BalanceEUR": 0.0,
+        "AccountType": 1,
+        "CurrencyType": 1
+      }
+    ]
+  }
+]

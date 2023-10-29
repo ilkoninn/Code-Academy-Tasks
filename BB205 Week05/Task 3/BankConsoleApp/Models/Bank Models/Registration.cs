@@ -1,7 +1,9 @@
 ﻿using BankConsoleApp.Enums;
 using BankConsoleApp.Exceptions.Registartion_Exceptions;
 using BankConsoleApp.Exceptions.User_Exceptions.Update_Exceptions;
+using BankConsoleApp.Interfaces;
 using BankConsoleApp.Models.Check_Information_Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -395,20 +397,36 @@ namespace BankConsoleApp.Models.Bank_Models
         public static void RegisterUserSection(string name, string surname, byte age, string phoneNumber, string email, string password, int newPincode, AccountType userAccountType, CurrencyType userCurrencyType)
         {
             Random random = new Random();
-            bool checkUser = false;
 
             string cardNumber = $"4050 6070 {random.Next(1000, 9999)} {random.Next(1000, 9999)}";
-            DateTime expirationDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime expirationDate = new DateTime(DateTime.Now.Year + 3, DateTime.Now.Month, 1);
             string formattedDate = expirationDate.ToString("MM/yy");
             int cvv = random.Next(100, 999);
 
             User newUser = new User(name, surname, age, email, password, phoneNumber);
             BankCard bankCard = new BankCard(newPincode, cardNumber, expirationDate, cvv, userAccountType, userCurrencyType);
 
-            for(int i = 0; i < Bank.UserAccounts.Count; i++)
+            GetAndPutJSONData(newUser, bankCard, cardNumber, formattedDate, cvv);
+
+            
+        }
+        public static void GetAndPutJSONData(User user, BankCard bankCard, string cardNumber, string formattedDate, int cvv)
+        {
+            bool checkUser = false;
+            string result;
+            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+
+            using (StreamReader sr = new StreamReader(userJSONPath))
             {
-                if (Bank.UserAccounts[i].Email == email &&
-                    Bank.UserAccounts[i].Password == password)
+                result = sr.ReadToEnd();
+            };
+
+            var deserializeJson = JsonConvert.DeserializeObject<List<User>>(result);
+            
+            for (int i = 0; i < deserializeJson.Count; i++)
+            {
+                if (deserializeJson[i].Email == user.Email &&
+                    deserializeJson[i].Password == user.Password)
                 {
                     checkUser = true;
                     break;
@@ -417,13 +435,19 @@ namespace BankConsoleApp.Models.Bank_Models
 
             if (checkUser)
             {
-                Console.WriteLine("\nThere is a such user in Bank!, try to login!\n");
+                Console.WriteLine("\nThere is a such user in Bank!(Email and password used before), try to login your account");
             }
             else
             {
-                newUser.bankCards.Add(bankCard);
-                Bank.UserAccounts.Add(newUser);
+                user.bankCards.Add(bankCard);
+                deserializeJson.Add(user);
 
+                var serializeJson = JsonConvert.SerializeObject(deserializeJson);
+
+                using (StreamWriter sw = new StreamWriter(userJSONPath))
+                {
+                    sw.WriteLine(serializeJson);
+                }
 
                 Console.WriteLine("\nYour new account successfully created, please log in!");
                 Console.WriteLine($"\n\tYour new card information\n");
@@ -431,8 +455,6 @@ namespace BankConsoleApp.Models.Bank_Models
                 Console.WriteLine($"Card expiration date: {formattedDate}");
                 Console.WriteLine($"Card number: {cvv}");
             }
-
-
         }
     }
 }

@@ -98,6 +98,17 @@ işlək metodlar saxlayır.
 Ediləcək olan işlər:
 - 28/10/2023 19:54 pm listi!
 
+30/10/2023 2:35 am
+
+Ən son etdiklərim:
+- Proqramda olan bəzi bugları düzəltdim.
+- Vizual bölümdə bəzi dəyişiklər edildi.
+- Artıq Data JSON file-ında yığılır, yəni
+proqram artıq static bir data-ya malikdir.
+- JSON üçün yeni class-lar yaradıldı.
+
+Bank Console App bitdi!
+
 --------------------------------------------------------------------------------------------
 
 					Console App Haqqında Məlumat
@@ -173,7 +184,12 @@ sayəsində digər hesablarımıza daxil ola bilirik.
 
 0. Exit - Proqramın bitməsi üçün lazım olan seçənəkdir.
 
+
+Qeyd:
+Proqramı ən son qeyd etdiyim tarixdə bitirdim, proqram da yenə də buglar
+ola bilər. JSON-a çevirmə proqramı yenidən yazmaq kimi oldu deyə bugların
+olma ehtimalı var. Amma proqram 95% şəkildə bitmiş sayıla bilər. Bundan 
+sonra ediləcəklər yalnız Solid prinsiplərini tətbiq etmək və proqramı daha
+optimal şəkildə yazmaq ola bilər. 
+
 Bank Console App-i İyi İşlətmələr :D
-
-
-

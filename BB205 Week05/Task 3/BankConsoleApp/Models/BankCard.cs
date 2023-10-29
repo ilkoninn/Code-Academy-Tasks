@@ -16,13 +16,12 @@ namespace BankConsoleApp.Models
     internal class BankCard : IBankCard
     {
         // Transaction-ları metodların daxilinə əlavə etmək lazımdır!
-        internal protected List<Transaction> transactions;
+        public List<Transaction> transactions;
 
 
         // Bank Account properities
         public int Pincode { get; set; }
-        public int AccountId { get; set; }
-        static int count;
+        public Guid AccountId { get; set; }
         public string CardNumber { get; set; }
         public DateTime ExpirationDate { get; set; }
         public int CVV { get; set; }
@@ -38,7 +37,7 @@ namespace BankConsoleApp.Models
 
         public BankCard(int pincode, string cardNumber, DateTime expirationDate, int cvv, AccountType accountType, CurrencyType currencyType)
         {
-            AccountId = ++count;
+            AccountId = Guid.NewGuid();
             BalanceAZN = 0;
             BalanceUSD = 0;
             BalanceEUR = 0;

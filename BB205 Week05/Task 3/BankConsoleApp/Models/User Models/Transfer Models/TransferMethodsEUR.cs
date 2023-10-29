@@ -30,14 +30,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount * (decimal)0.55);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount * (decimal)0.55, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositAZN(amount);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositAZN(bankCard, bankCard2, amount * (decimal)0.55, amount, CurrencyType.EUR, CurrencyType.AZN);
                     }
                     else
                     {
@@ -67,14 +60,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount2 * (decimal)0.94);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount2 * (decimal)0.94, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositAZN(amount2 * (decimal)1.7);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount2 * (decimal)1.7, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositAZN(bankCard, bankCard2, amount2 * (decimal)0.94, amount2 * (decimal)1.7, CurrencyType.EUR, CurrencyType.AZN);
                     }
                     else
                     {
@@ -104,14 +90,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount3);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount3, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositAZN(amount3 * (decimal)1.8);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount3 * (decimal)1.8, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositAZN(bankCard, bankCard2, amount3, amount3 * (decimal)1.8, CurrencyType.EUR, CurrencyType.AZN);
                     }
                     else
                     {
@@ -150,14 +129,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount * (decimal)0.55);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount * (decimal)0.55, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositUSD(amount * (decimal)1.7);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount * (decimal)1.7, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositUSD(bankCard, bankCard2, amount * (decimal)0.55, amount * (decimal)1.7, CurrencyType.EUR, CurrencyType.USD);
                     }
                     else
                     {
@@ -187,14 +159,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount2 * (decimal)0.94);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount2 * (decimal)0.94, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositUSD(amount2);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount2, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositUSD(bankCard, bankCard2, amount2 * (decimal)0.94, amount2, CurrencyType.EUR, CurrencyType.USD);
                     }
                     else
                     {
@@ -224,14 +189,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount3);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount3, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositUSD(amount3 * (decimal)1.06);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount3 * (decimal)1.06, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositUSD(bankCard, bankCard2, amount3, amount3 * (decimal)1.06, CurrencyType.EUR, CurrencyType.USD);
                     }
                     else
                     {
@@ -270,14 +228,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount * (decimal)0.55);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount * (decimal)0.55, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositEUR(amount * (decimal)0.55);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount * (decimal)0.55, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositEUR(bankCard, bankCard2, amount * (decimal)0.55, amount * (decimal)0.55, CurrencyType.EUR, CurrencyType.EUR);
                     }
                     else
                     {
@@ -307,14 +258,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount2 * (decimal)0.94);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount2 * (decimal)0.94, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositEUR(amount2 * (decimal)0.94);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount2 * (decimal)0.94, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositEUR(bankCard, bankCard2, amount2 * (decimal)0.94, amount2 * (decimal)0.94, CurrencyType.EUR, CurrencyType.EUR);
                     }
                     else
                     {
@@ -344,14 +288,7 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                             }
                             return;
                         }
-                        bankCard.WithDrawEUR(amount3);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(amount3, dateTime, Operations.WithdrawMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                        bankCard2.DepositEUR(amount3);
-                        DateTime dateTime2 = DateTime.Now;
-                        Transaction transaction2 = new Transaction(amount3, dateTime2, Operations.DepositMoney, currencyType);
-                        bankCard2.transactions.Add(transaction2);
+                        WithdrawAndDepositEURMoneyTransfer.WithdrawEURDepositEUR(bankCard, bankCard2, amount3, amount3, CurrencyType.EUR, CurrencyType.EUR);
                     }
                     else
                     {

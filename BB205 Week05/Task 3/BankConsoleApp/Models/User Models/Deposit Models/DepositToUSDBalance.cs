@@ -1,4 +1,5 @@
 ﻿using BankConsoleApp.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace BankConsoleApp.Models.User_Models.Deposit_Models
     internal static class DepositToUSDBalance
     {
 
-        public static void Deposit(BankCard bankCard, CurrencyType currencyType)
+        public static void Deposit(User user, BankCard bankCard, CurrencyType currencyType)
         {
             switch (currencyType)
             {
@@ -23,10 +24,7 @@ namespace BankConsoleApp.Models.User_Models.Deposit_Models
                     string amount = Console.ReadLine();
                     if (decimal.TryParse(amount, out decimal newAmount))
                     {
-                        bankCard.DepositUSD(newAmount * (decimal)0.59);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
+                        DepositToUSDBankCard(user, bankCard, newAmount * (decimal)0.59, currencyType);
                     }
                     else
                     {
@@ -45,10 +43,7 @@ namespace BankConsoleApp.Models.User_Models.Deposit_Models
                     string amount2 = Console.ReadLine();
                     if (decimal.TryParse(amount2, out decimal newAmount2))
                     {
-                        bankCard.DepositUSD(newAmount2);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount2, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
+                        DepositToUSDBankCard(user, bankCard, newAmount2, currencyType);
                     }
                     else
                     {
@@ -67,10 +62,7 @@ namespace BankConsoleApp.Models.User_Models.Deposit_Models
                     string amount3 = Console.ReadLine();
                     if (decimal.TryParse(amount3, out decimal newAmount3))
                     {
-                        bankCard.DepositUSD(newAmount3 * (decimal)1.06);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount3, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
+                        DepositToUSDBankCard(user, bankCard, newAmount3 * (decimal)1.06, currencyType);
                     }
                     else
                     {
@@ -86,6 +78,34 @@ namespace BankConsoleApp.Models.User_Models.Deposit_Models
                 default:
                     Console.WriteLine("\nInvalid choice, try again!\n");
                     break;
+            }
+        }
+        public static void DepositToUSDBankCard(User user, BankCard bankCard, decimal amount, CurrencyType currencyType)
+        {
+            string result;
+            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+
+            using (StreamReader sr = new StreamReader(userJSONPath))
+            {
+                result = sr.ReadToEnd();
+            };
+
+            var deserializeJson = JsonConvert.DeserializeObject<List<User>>(result);
+
+            User newUser = deserializeJson.Find(u => u.UserId == user.UserId);
+            newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositUSD(amount);
+            if (amount > 0)
+            {
+                DateTime dateTime = DateTime.Now;
+                Transaction transaction = new Transaction(amount, dateTime, Enums.Operations.DepositMoney, currencyType);
+                newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
+            }
+
+            var serializeJson = JsonConvert.SerializeObject(deserializeJson);
+
+            using (StreamWriter sw = new StreamWriter(userJSONPath))
+            {
+                sw.WriteLine(serializeJson);
             }
         }
     }

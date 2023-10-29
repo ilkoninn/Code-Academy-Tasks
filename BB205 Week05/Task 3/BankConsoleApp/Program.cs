@@ -1,5 +1,7 @@
 ﻿using BankConsoleApp.Enums;
+using BankConsoleApp.Interfaces;
 using BankConsoleApp.Models;
+using Newtonsoft.Json;
 using System.ComponentModel.Design;
 using System.IO.Pipes;
 
@@ -10,7 +12,8 @@ namespace BankConsoleApp
         internal protected static User LoggedInUser { get; set; }
         static void Main(string[] args)
         {
-            Menu();   
+            CreateData();
+            Menu();
         }
 
         public static void Menu()
@@ -45,7 +48,19 @@ namespace BankConsoleApp
                 // After operations Menu
                 else
                 {
-                    Console.WriteLine($"\n\tWelcome {LoggedInUser.Name} {LoggedInUser.Surname} \n");
+                    string result;
+                    string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+
+                    using (StreamReader sr = new StreamReader(userJSONPath))
+                    {
+                        result = sr.ReadToEnd();
+                    };
+
+                    var deserializeJson = JsonConvert.DeserializeObject<List<User>>(result);
+
+                    User newUser = deserializeJson.Find(u => u.UserId == LoggedInUser.UserId);
+
+                    Console.WriteLine($"\n\tWelcome {newUser.Name} {newUser.Surname} \n");
                     Console.WriteLine("1. Deposit money");
                     Console.WriteLine("2. Withdraw money"); 
                     Console.WriteLine("3. History");
@@ -59,9 +74,9 @@ namespace BankConsoleApp
                     Console.WriteLine("0. Exit");
                     Console.Write("\nPlease, enter a number(0-10): ");
                     string userChoice = Console.ReadLine();
-                    if (Operations.TryParse(userChoice, out Operations choice))
+                    if (Enums.Operations.TryParse(userChoice, out Enums.Operations choice))
                     {
-                        if (choice == Operations.Default) running = false;
+                        if (choice == Enums.Operations.Default) running = false;
                         SecondMenu(choice, bank);
                     }
                     else
@@ -98,46 +113,64 @@ namespace BankConsoleApp
             }
         }
 
-        public static void SecondMenu(Operations userChoice, Bank bank)
+        public static void SecondMenu(Enums.Operations userChoice, Bank bank)
         {
             switch(userChoice)
             {
                 case 0:
                     return;
                     break;
-                case Operations.DepositMoney:
+                case Enums.Operations.DepositMoney:
                     LoggedInUser.DepositMoney(LoggedInUser);
                     break;
-                case Operations.WithdrawMoney:
+                case Enums.Operations.WithdrawMoney:
                     LoggedInUser.WithdrawMoney(LoggedInUser);
                     break;
-                case Operations.History:
+                case Enums.Operations.History:
                     LoggedInUser.ListTransaction(LoggedInUser);                    
                     break;
-                case Operations.Transfer:
+                case Enums.Operations.Transfer:
                     Bank.Transfer(LoggedInUser);
                     break;
-                case Operations.Cards:
+                case Enums.Operations.Cards:
                     LoggedInUser.ShowAllCards(LoggedInUser);
                     break;
-                case Operations.AddCard:
+                case Enums.Operations.AddCard:
                     LoggedInUser.AddCard(LoggedInUser);
                     break;
-                case Operations.CurrencyConversion:
+                case Enums.Operations.CurrencyConversion:
                     LoggedInUser.UserCurrencyConversion(LoggedInUser);
                     break;
-                case Operations.DeleteCard:
+                case Enums.Operations.DeleteCard:
                     LoggedInUser.DeleteCard(LoggedInUser);
                     break;
-                case Operations.Settings:
+                case Enums.Operations.Settings:
                     LoggedInUser.UserSettings(LoggedInUser);
                     break;
-                case Operations.Logout:
+                case Enums.Operations.Logout:
                     LoggedInUser = null;
                     break;
                 default:
                     Console.WriteLine("Invalid choice, please try again!(0-10)");
                     break;
+            }
+        }
+
+        public static void CreateData()
+        {
+            string dataDir = @"C:\Users\99470\Desktop\BankConsoleApp";
+            string bankDataDir = @"\Bank Data";
+
+            if(!Directory.Exists(dataDir + bankDataDir))
+            {
+                Directory.CreateDirectory(dataDir + bankDataDir);
+            }
+
+            string userDataDir = dataDir + bankDataDir + @"\UserData.json";
+
+            if(!File.Exists(userDataDir))
+            {
+                File.Create(userDataDir);
             }
         }
     }

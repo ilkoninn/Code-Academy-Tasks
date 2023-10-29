@@ -17,17 +17,7 @@ namespace BankConsoleApp.Models.User_Models
         {
             Console.WriteLine("\n\tDeposit Money section\n");
             PATH14:
-            Console.WriteLine("Please, choose a card: ");
-            Console.WriteLine("\nCard Number | Card CVV | Card expiration date\n");
-            int count = 0;
-            foreach (var item in user.bankCards)
-            {
-                count++;
-                string formattedDate = item.ExpirationDate.ToString("MM/yy");
-                Console.WriteLine($"{count}. {item.CardNumber} | {item.CVV} | {formattedDate}");
-            }
-            Console.WriteLine("0. Exit");
-            Console.Write($"\nUser choice(0-{count}): ");
+            CheckBankInformation.GetCards(user);
             string userChoice = Console.ReadLine();
             if (userChoice == "0") return;
             if (int.TryParse(userChoice, out int choice))
@@ -66,13 +56,13 @@ namespace BankConsoleApp.Models.User_Models
                                                 return;
                                                 break;
                                             case 1:
-                                                DepositToAZNBalance.Deposit(userBankCard, currencyType);
+                                                DepositToAZNBalance.Deposit(user, userBankCard, currencyType);
                                                 break;
                                             case 2:
-                                                DepositToUSDBalance.Deposit(userBankCard, currencyType);
+                                                DepositToUSDBalance.Deposit(user, userBankCard, currencyType);
                                                 break;
                                             case 3:
-                                                DepositToEURBalance.Deposit(userBankCard, currencyType);
+                                                DepositToEURBalance.Deposit(user, userBankCard, currencyType);
                                                 break;
                                             default:
                                                 Console.WriteLine("Invalid choice, try again!");

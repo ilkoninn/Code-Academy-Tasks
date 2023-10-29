@@ -10,19 +10,18 @@ namespace BankConsoleApp.Models
     internal class User
     {
         // Bank User properities
-        int UserId { get; set; }
-        static int _id;
-        internal protected string Name { get; set; }
-        internal protected string Surname { get; set; }
-        internal protected byte Age { get; set; }
-        internal protected string Email { get; set; }
-        internal protected string Password { get; set; }
-        internal protected string PhoneNumber { get; set; }
-        internal protected List<BankCard> bankCards { get; set; }
+        public Guid UserId { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public byte Age { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string PhoneNumber { get; set; }
+        public List<BankCard> bankCards { get; set; }
 
         public User(string name, string surname, byte age ,string email, string password, string phoneNumber)
         {
-            UserId = ++_id;
+            UserId = Guid.NewGuid();
             Name = name;
             Surname = surname;
             Age = age;
