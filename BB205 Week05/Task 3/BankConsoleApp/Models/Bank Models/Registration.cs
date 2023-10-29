@@ -395,6 +395,7 @@ namespace BankConsoleApp.Models.Bank_Models
         public static void RegisterUserSection(string name, string surname, byte age, string phoneNumber, string email, string password, int newPincode, AccountType userAccountType, CurrencyType userCurrencyType)
         {
             Random random = new Random();
+            bool checkUser = false;
 
             string cardNumber = $"4050 6070 {random.Next(1000, 9999)} {random.Next(1000, 9999)}";
             DateTime expirationDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -404,15 +405,33 @@ namespace BankConsoleApp.Models.Bank_Models
             User newUser = new User(name, surname, age, email, password, phoneNumber);
             BankCard bankCard = new BankCard(newPincode, cardNumber, expirationDate, cvv, userAccountType, userCurrencyType);
 
-            newUser.bankCards.Add(bankCard);
-            Bank.UserAccounts.Add(newUser);
+            for(int i = 0; i < Bank.UserAccounts.Count; i++)
+            {
+                if (Bank.UserAccounts[i].Email == email &&
+                    Bank.UserAccounts[i].Password == password)
+                {
+                    checkUser = true;
+                    break;
+                }
+            }
+
+            if (checkUser)
+            {
+                Console.WriteLine("\nThere is a such user in Bank!, try to login!\n");
+            }
+            else
+            {
+                newUser.bankCards.Add(bankCard);
+                Bank.UserAccounts.Add(newUser);
 
 
-            Console.WriteLine("\nYour new account successfully created, please log in!");
-            Console.WriteLine($"\n\tYour new card information\n");
-            Console.WriteLine($"Card number: {cardNumber}");
-            Console.WriteLine($"Card expiration date: {formattedDate}");
-            Console.WriteLine($"Card number: {cvv}");
+                Console.WriteLine("\nYour new account successfully created, please log in!");
+                Console.WriteLine($"\n\tYour new card information\n");
+                Console.WriteLine($"Card number: {cardNumber}");
+                Console.WriteLine($"Card expiration date: {formattedDate}");
+                Console.WriteLine($"Card number: {cvv}");
+            }
+
 
         }
     }

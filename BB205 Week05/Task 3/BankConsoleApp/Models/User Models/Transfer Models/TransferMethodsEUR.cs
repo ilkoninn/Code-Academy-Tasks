@@ -19,6 +19,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney = Console.ReadLine();
                     if (decimal.TryParse(transferMoney, out var amount))
                     {
+                        if (bankCard.BalanceEUR < amount * (decimal)0.55)
+                        { 
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH1;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount * (decimal)0.55);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount * (decimal)0.55, dateTime, Operations.WithdrawMoney, currencyType);
@@ -45,6 +56,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney2 = Console.ReadLine();
                     if (decimal.TryParse(transferMoney2, out var amount2))
                     {
+                        if (bankCard.BalanceEUR < amount2 * (decimal)0.94)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH2;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount2 * (decimal)0.94);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount2 * (decimal)0.94, dateTime, Operations.WithdrawMoney, currencyType);
@@ -71,6 +93,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney3 = Console.ReadLine();
                     if (decimal.TryParse(transferMoney3, out var amount3))
                     {
+                        if (bankCard.BalanceEUR < amount3)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH3;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount3);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount3, dateTime, Operations.WithdrawMoney, currencyType);
@@ -106,6 +139,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney = Console.ReadLine();
                     if (decimal.TryParse(transferMoney, out var amount))
                     {
+                        if (bankCard.BalanceEUR < amount * (decimal)0.55)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH1;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount * (decimal)0.55);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount * (decimal)0.55, dateTime, Operations.WithdrawMoney, currencyType);
@@ -132,6 +176,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney2 = Console.ReadLine();
                     if (decimal.TryParse(transferMoney2, out var amount2))
                     {
+                        if (bankCard.BalanceEUR < amount2 * (decimal)0.94)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH2;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount2 * (decimal)0.94);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount2 * (decimal)0.94, dateTime, Operations.WithdrawMoney, currencyType);
@@ -158,6 +213,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney3 = Console.ReadLine();
                     if (decimal.TryParse(transferMoney3, out var amount3))
                     {
+                        if (bankCard.BalanceEUR < amount3)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH3;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount3);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount3, dateTime, Operations.WithdrawMoney, currencyType);
@@ -193,6 +259,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney = Console.ReadLine();
                     if (decimal.TryParse(transferMoney, out var amount))
                     {
+                        if (bankCard.BalanceEUR < amount * (decimal)0.55)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH1;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount * (decimal)0.55);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount * (decimal)0.55, dateTime, Operations.WithdrawMoney, currencyType);
@@ -219,6 +296,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney2 = Console.ReadLine();
                     if (decimal.TryParse(transferMoney2, out var amount2))
                     {
+                        if (bankCard.BalanceEUR < amount2 * (decimal)0.94)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH2;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount2 * (decimal)0.94);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount2 * (decimal)0.94, dateTime, Operations.WithdrawMoney, currencyType);
@@ -245,6 +333,17 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     string transferMoney3 = Console.ReadLine();
                     if (decimal.TryParse(transferMoney3, out var amount3))
                     {
+                        if (bankCard.BalanceEUR < amount3)
+                        {
+                            Console.WriteLine("\nThe amount of money is greater than balance!\n");
+                            Console.Write("Continue?(Y/N): ");
+                            string yesOrNo = Console.ReadLine().ToLower().Trim();
+                            if (yesOrNo == "yes" || yesOrNo == "y")
+                            {
+                                goto PATH3;
+                            }
+                            return;
+                        }
                         bankCard.WithDrawEUR(amount3);
                         DateTime dateTime = DateTime.Now;
                         Transaction transaction = new Transaction(amount3, dateTime, Operations.WithdrawMoney, currencyType);
