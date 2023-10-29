@@ -28,7 +28,7 @@ namespace BankConsoleApp.Models.User_Models.Currency_Conversion_Model
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositUSD(amount2);
             DateTime dateTime = DateTime.Now;
             Transaction transaction = new Transaction(amount1, dateTime, Enums.Operations.WithdrawMoney, currencyType1);
-            Transaction transaction2 = new Transaction(amount1, dateTime, Enums.Operations.DepositMoney, currencyType2);
+            Transaction transaction2 = new Transaction(amount2, dateTime, Enums.Operations.DepositMoney, currencyType2);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction2);
 
@@ -57,7 +57,7 @@ namespace BankConsoleApp.Models.User_Models.Currency_Conversion_Model
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositEUR(amount2);
             DateTime dateTime = DateTime.Now;
             Transaction transaction = new Transaction(amount1, dateTime, Enums.Operations.WithdrawMoney, currencyType1);
-            Transaction transaction2 = new Transaction(amount1, dateTime, Enums.Operations.DepositMoney, currencyType2);
+            Transaction transaction2 = new Transaction(amount2, dateTime, Enums.Operations.DepositMoney, currencyType2);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction2);
 
@@ -86,7 +86,7 @@ namespace BankConsoleApp.Models.User_Models.Currency_Conversion_Model
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositAZN(amount2);
             DateTime dateTime = DateTime.Now;
             Transaction transaction = new Transaction(amount1, dateTime, Enums.Operations.WithdrawMoney, currencyType1);
-            Transaction transaction2 = new Transaction(amount1, dateTime, Enums.Operations.DepositMoney, currencyType2);
+            Transaction transaction2 = new Transaction(amount2, dateTime, Enums.Operations.DepositMoney, currencyType2);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction2);
 
@@ -115,7 +115,7 @@ namespace BankConsoleApp.Models.User_Models.Currency_Conversion_Model
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositEUR(amount2);
             DateTime dateTime = DateTime.Now;
             Transaction transaction = new Transaction(amount1, dateTime, Enums.Operations.WithdrawMoney, currencyType1);
-            Transaction transaction2 = new Transaction(amount1, dateTime, Enums.Operations.DepositMoney, currencyType2);
+            Transaction transaction2 = new Transaction(amount2, dateTime, Enums.Operations.DepositMoney, currencyType2);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction2);
 
@@ -144,7 +144,7 @@ namespace BankConsoleApp.Models.User_Models.Currency_Conversion_Model
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositAZN(amount2);
             DateTime dateTime = DateTime.Now;
             Transaction transaction = new Transaction(amount1, dateTime, Enums.Operations.WithdrawMoney, currencyType1);
-            Transaction transaction2 = new Transaction(amount1, dateTime, Enums.Operations.DepositMoney, currencyType2);
+            Transaction transaction2 = new Transaction(amount2, dateTime, Enums.Operations.DepositMoney, currencyType2);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction2);
 
@@ -173,7 +173,7 @@ namespace BankConsoleApp.Models.User_Models.Currency_Conversion_Model
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).DepositUSD(amount2);
             DateTime dateTime = DateTime.Now;
             Transaction transaction = new Transaction(amount1, dateTime, Enums.Operations.WithdrawMoney, currencyType1);
-            Transaction transaction2 = new Transaction(amount1, dateTime, Enums.Operations.DepositMoney, currencyType2);
+            Transaction transaction2 = new Transaction(amount2, dateTime, Enums.Operations.DepositMoney, currencyType2);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction);
             newUser.bankCards.Find(u => u.AccountId == bankCard.AccountId).transactions.Add(transaction2);
 
