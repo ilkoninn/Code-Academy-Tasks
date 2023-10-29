@@ -1,6 +1,7 @@
 ﻿
 using BankConsoleApp.Enums;
 using BankConsoleApp.Exceptions.Bank_Exceptions;
+using BankConsoleApp.Interfaces;
 using BankConsoleApp.Models.Check_Information_Models;
 using BankConsoleApp.Models.User_Models.Transfer_Models;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class MoneyTransferCardToCard
+    internal static class MoneyTransferCardToCard
     {
         public static void Transfer(User user)
         {

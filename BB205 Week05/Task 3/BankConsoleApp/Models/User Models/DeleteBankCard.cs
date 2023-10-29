@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class DeleteBankCard
+    internal static class DeleteBankCard
     {
         public static void DeleteAccount(User user)
         {

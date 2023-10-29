@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class Settings
+    internal static class Settings
     {
         public static void UserSettings(User user)
         {

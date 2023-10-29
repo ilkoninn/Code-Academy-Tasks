@@ -20,7 +20,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney, out var amount))
                     {
                         bankCard.WithDrawAZN(amount);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositAZN(amount);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -40,7 +46,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney2, out var amount2))
                     {
                         bankCard.WithDrawAZN(amount2 * (decimal)1.7);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount2 * (decimal)1.7, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositAZN(amount2 * (decimal)1.7);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount2 * (decimal)1.7, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -60,7 +72,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney3, out var amount3))
                     {
                         bankCard.WithDrawAZN(amount3 * (decimal)1.8);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount3 * (decimal)1.8, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositAZN(amount3 * (decimal)1.8);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount3 * (decimal)1.8, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -89,7 +107,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney, out var amount))
                     {
                         bankCard.WithDrawAZN(amount);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositUSD(amount * (decimal)0.59);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount * (decimal)0.59, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -109,7 +133,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney2, out var amount2))
                     {
                         bankCard.WithDrawAZN(amount2 * (decimal)1.7);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount2 * (decimal)1.7, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositUSD(amount2);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount2, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -129,7 +159,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney3, out var amount3))
                     {
                         bankCard.WithDrawAZN(amount3 * (decimal)1.8);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount3 * (decimal)1.8, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositUSD(amount3 * (decimal)1.06);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount3 * (decimal)1.06, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -158,7 +194,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney, out var amount))
                     {
                         bankCard.WithDrawAZN(amount);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositEUR(amount * (decimal)0.55);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount * (decimal)0.55, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -178,7 +220,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney2, out var amount2))
                     {
                         bankCard.WithDrawAZN(amount2 * (decimal)1.7);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount2 * (decimal)1.7, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositEUR(amount2 * (decimal)0.94);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount2 * (decimal)0.94, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {
@@ -198,7 +246,13 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
                     if (decimal.TryParse(transferMoney3, out var amount3))
                     {
                         bankCard.WithDrawAZN(amount3 * (decimal)1.8);
+                        DateTime dateTime = DateTime.Now;
+                        Transaction transaction = new Transaction(amount3 * (decimal)1.8, dateTime, Operations.WithdrawMoney, currencyType);
+                        bankCard.transactions.Add(transaction);
                         bankCard2.DepositEUR(amount3);
+                        DateTime dateTime2 = DateTime.Now;
+                        Transaction transaction2 = new Transaction(amount3, dateTime2, Operations.DepositMoney, currencyType);
+                        bankCard2.transactions.Add(transaction2);
                     }
                     else
                     {

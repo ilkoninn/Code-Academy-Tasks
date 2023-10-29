@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class ShowAllBankCards
+    internal static class ShowAllBankCards
     {
         public static void GetAllCards(User user)
         {

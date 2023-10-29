@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class WithdrawMoneyFromBankCard
+    internal static class WithdrawMoneyFromBankCard
     {
         public static void WithdrawMoney(User user)
         {

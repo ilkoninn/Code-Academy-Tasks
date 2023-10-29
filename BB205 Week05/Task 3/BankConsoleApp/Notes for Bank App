@@ -93,6 +93,7 @@ yaradıldı, amma onları List-in metodlarına tökmək lazımdı
 Ən son etdiklərim:
 - Yeni class-lar yaratdım, bu class-lar öz daxilində
 işlək metodlar saxlayır.
+- Transfer bölümünə də transactionlar əlavə elədim.
 
 Ediləcək olan işlər:
 - 28/10/2023 19:54 pm listi!

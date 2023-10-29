@@ -10,6 +10,11 @@ namespace BankConsoleApp.Interfaces
     internal interface IBankCard
     {
         int AccountId { get; }
+        int Pincode { get; set; }
+        string CardNumber { get; set; }
+        DateTime ExpirationDate { get; set; }
+        int CVV { get; set; }
+
         decimal BalanceAZN { get; }
         decimal BalanceUSD { get; }
         decimal BalanceEUR { get; }

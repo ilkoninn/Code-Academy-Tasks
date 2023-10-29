@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class BankCardListTransaction
+    internal static class BankCardListTransaction
     {
         public static void ListTransactions(User user)
         {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class DepositMoneyToBankCard
+    internal static class DepositMoneyToBankCard
     {
         public static void DepositMoney(User user)
         {

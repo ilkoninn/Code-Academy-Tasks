@@ -13,5 +13,7 @@ namespace BankConsoleApp.Interfaces
         decimal Amount { get; }
         DateTime TransactionDate { get; }
         Operations TransactionType { get; }
+        CurrencyType CurrencyType { get; set; }
+
     }
 }

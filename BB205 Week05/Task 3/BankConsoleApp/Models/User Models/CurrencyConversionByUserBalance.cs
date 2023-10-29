@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class CurrencyConversionByUserBalance
+    internal static class CurrencyConversionByUserBalance
     {
         public static void CurrencyConversion(User user)
         {

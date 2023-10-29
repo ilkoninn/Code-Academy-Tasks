@@ -1,4 +1,5 @@
 ﻿using BankConsoleApp.Enums;
+using BankConsoleApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankConsoleApp.Models.User_Models
 {
-    internal class AddBankCard
+    internal static class AddBankCard
     {
         public static void AddCard(User user)
         {
