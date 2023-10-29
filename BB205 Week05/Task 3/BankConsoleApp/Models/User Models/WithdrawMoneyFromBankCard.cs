@@ -1,6 +1,7 @@
 ﻿using BankConsoleApp.Enums;
 using BankConsoleApp.Exceptions.Bank_Exceptions;
 using BankConsoleApp.Models.Check_Information_Models;
+using BankConsoleApp.Models.User_Models.Withdraw_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,13 +65,13 @@ namespace BankConsoleApp.Models.User_Models
                                                 return;
                                                 break;
                                             case 1:
-                                                WithdrawFromAZNBalance(userBankCard, currencyType);
+                                                WithdrawFromAZNBalance.Withdraw(userBankCard, currencyType);
                                                 break;
                                             case 2:
-                                                WithdrawFromUSDBalance(userBankCard, currencyType);
+                                                WithdrawFromUSDBalance.Withdraw(userBankCard, currencyType);
                                                 break;
                                             case 3:
-                                                WithdrawFromEURBalance(userBankCard, currencyType);
+                                                WithdrawFromEURBalance.Withdraw(userBankCard, currencyType);
                                                 break;
                                             default:
                                                 Console.WriteLine("Invalid choice, try again!");
@@ -173,239 +174,5 @@ namespace BankConsoleApp.Models.User_Models
             }
         }
 
-        public static void WithdrawFromAZNBalance(BankCard bankCard, CurrencyType currencyType)
-        {
-            switch (currencyType)
-            {
-                case CurrencyType.Default:
-                    return;
-                    break;
-                case CurrencyType.AZN:
-                PATH16:
-                    Console.Write("\nMoney value: ");
-                    string amount = Console.ReadLine();
-                    if (decimal.TryParse(amount, out decimal newAmount))
-                    {
-                        bankCard.WithDrawAZN(newAmount);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH16;
-                        }
-                    }
-                    break;
-                case CurrencyType.USD:
-                PATH17:
-                    Console.Write("\nMoney value: ");
-                    string amount2 = Console.ReadLine();
-                    if (decimal.TryParse(amount2, out decimal newAmount2))
-                    {
-                        bankCard.WithDrawAZN(newAmount2 * (decimal)1.7);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount2, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH17;
-                        }
-                    }
-                    break;
-                case CurrencyType.EUR:
-                PATH18:
-                    Console.Write("\nMoney value: ");
-                    string amount3 = Console.ReadLine();
-                    if (decimal.TryParse(amount3, out decimal newAmount3))
-                    {
-                        bankCard.WithDrawAZN(newAmount3 * (decimal)1.8);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount3, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH18;
-                        }
-                    }
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid choice, try again!\n");
-                    break;
-            }
-        }
-        public static void WithdrawFromUSDBalance(BankCard bankCard, CurrencyType currencyType)
-        {
-            switch (currencyType)
-            {
-                case CurrencyType.Default:
-                    return;
-                    break;
-                case CurrencyType.AZN:
-                PATH19:
-                    Console.Write("\nMoney value: ");
-                    string amount = Console.ReadLine();
-                    if (decimal.TryParse(amount, out decimal newAmount))
-                    {
-                        bankCard.WithDrawUSD(newAmount * (decimal)0.59);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH19;
-                        }
-                    }
-                    break;
-                case CurrencyType.USD:
-                PATH20:
-                    Console.Write("\nMoney value: ");
-                    string amount2 = Console.ReadLine();
-                    if (decimal.TryParse(amount2, out decimal newAmount2))
-                    {
-                        bankCard.WithDrawUSD(newAmount2);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount2, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH20;
-                        }
-                    }
-                    break;
-                case CurrencyType.EUR:
-                PATH21:
-                    Console.Write("\nMoney value: ");
-                    string amount3 = Console.ReadLine();
-                    if (decimal.TryParse(amount3, out decimal newAmount3))
-                    {
-                        bankCard.WithDrawUSD(newAmount3 * (decimal)1.06);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount3, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH21;
-                        }
-                    }
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid choice, try again!\n");
-                    break;
-            }
-        }
-        public static void WithdrawFromEURBalance(BankCard bankCard, CurrencyType currencyType)
-        {
-            switch (currencyType)
-            {
-                case CurrencyType.Default:
-                    return;
-                    break;
-                case CurrencyType.AZN:
-                PATH22:
-                    Console.Write("\nMoney value: ");
-                    string amount = Console.ReadLine();
-                    if (decimal.TryParse(amount, out decimal newAmount))
-                    {
-                        bankCard.WithDrawEUR(newAmount * (decimal)0.56);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH22;
-                        }
-                    }
-                    break;
-                case CurrencyType.USD:
-                PATH23:
-                    Console.Write("\nMoney value: ");
-                    string amount2 = Console.ReadLine();
-                    if (decimal.TryParse(amount2, out decimal newAmount2))
-                    {
-                        bankCard.WithDrawEUR(newAmount2 * (decimal)0.94);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount2, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH23;
-                        }
-                    }
-                    break;
-                case CurrencyType.EUR:
-                PATH24:
-                    Console.Write("\nMoney value: ");
-                    string amount3 = Console.ReadLine();
-                    if (decimal.TryParse(amount3, out decimal newAmount3))
-                    {
-                        bankCard.WithDrawEUR(newAmount3);
-                        DateTime dateTime = DateTime.Now;
-                        Transaction transaction = new Transaction(newAmount3, dateTime, Enums.Operations.DepositMoney, currencyType);
-                        bankCard.transactions.Add(transaction);
-                    }
-                    else
-                    {
-                        Console.WriteLine("The amount of money should be decimal type!");
-                        Console.Write("Continue?(Y/N): ");
-                        string yesOrNo2 = Console.ReadLine().ToLower().Trim();
-                        if (yesOrNo2 == "yes" || yesOrNo2 == "y")
-                        {
-                            goto PATH24;
-                        }
-                    }
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid choice, try again!\n");
-                    break;
-            }
-        }
     }
 }

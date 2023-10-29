@@ -1,6 +1,6 @@
 ﻿--------------------------------------------------------------------------------------------
 
-				Console App Taskının Gedişatı
+						Console App Taskının Gedişatı
 
 21/10/2023 13:26 pm
 
@@ -88,9 +88,18 @@ yaradıldı, amma onları List-in metodlarına tökmək lazımdı
 - Əgər buglar varsa, onları düzəltmək lazımdı
 - Hələ ki Data JSON-a tökülməyib, onu etməyə çalış.
 
+29/10/2023 12:56 pm
+
+Ən son etdiklərim:
+- Yeni class-lar yaratdım, bu class-lar öz daxilində
+işlək metodlar saxlayır.
+
+Ediləcək olan işlər:
+- 28/10/2023 19:54 pm listi!
+
 --------------------------------------------------------------------------------------------
 
-				Console App Haqqında Məlumat
+					Console App Haqqında Məlumat
 
 Salam Ilkin Bank Console App-inə xoş gəlmisiniz
 Proqram işləyən zaman qarşımıza ilk menyumuz çıxır. Bu menyuda yalnız
