@@ -5,6 +5,7 @@ use Cinema
 CREATE TABLE Movies
 (
 	ID INT PRIMARY KEY IDENTITY,
+	DirectorID INT REFERENCES Directors(ID),
 	[Name] NVARCHAR(40) NOT NULL,
 	Rate DECIMAL(3, 1) CHECK(Rate >= 0 AND Rate <= 10)
 )
@@ -16,7 +17,6 @@ CREATE TABLE Genres
 CREATE TABLE Directors
 (
 	ID INT PRIMARY KEY IDENTITY,
-	MovieID INT REFERENCES Movies(ID),
 	[Name] NVARCHAR(40) NOT NULL,
 	Surname NVARCHAR(40) NOT NULL,
 	Age INT NOT NULL CHECK(Age >= 18),
@@ -43,18 +43,18 @@ CREATE TABLE MoviesActors
 
 INSERT INTO Movies (Name, Rate)
 VALUES 
-    ('Se7en', 8.5),
-    ('Ford v Ferrari', 7.2),
-    ('Django Unchained', 7.8),
-    ('Interstellar', 9.0),
-    ('Forrest Gump', 9.2),
-    ('Joker', 9.5);
+    (1, 'Se7en', 8.5),
+    (1, 'Ford v Ferrari', 7.2),
+    (3, 'Django Unchained', 7.8),
+    (2, 'Interstellar', 9.0),
+    (2, 'Forrest Gump', 9.2),
+    (3, 'Joker', 9.5);
 
-INSERT INTO Directors (MovieID, Name, Surname, Age)
+INSERT INTO Directors (Name, Surname, Age)
 VALUES 
-    (4, 'David', 'Fincher', 35),
-    (7, 'Christopher', 'Nolan', 40),
-    (6, 'Quentin', 'Tarantino', 45);
+    ('David', 'Fincher', 35),
+    ('Christopher', 'Nolan', 40),
+    ('Quentin', 'Tarantino', 45);
 
 INSERT INTO Genres (Name)
 VALUES 
@@ -73,18 +73,18 @@ VALUES
 
 INSERT INTO MoviesGenres (MovieID, GenreID)
 VALUES
-    (4, 1),
-    (4, 2),
-    (5, 3),
-    (6, 2);
+    (1, 1),
+    (1, 3),
+    (2, 3),
+    (3, 2);
 
 INSERT INTO MoviesActors (MovieID, ActorID)
 VALUES
-    (4, 1),
-    (4, 2),
-    (5, 5),
-    (9, 6),
-    (6, 4);
+    (1, 1),
+    (1, 2),
+    (3, 5),
+    (6, 6),
+    (3, 4);
 
 -- Rate deyeri 8den yuxari olan kinolari ekrana cixaran query.
 SELECT [Name] AS [Movie_Name] FROM Movies
@@ -109,7 +109,7 @@ SELECT
     Directors.Name + ' ' + Directors.Surname AS Director_Full_Name
 FROM Movies
 JOIN Directors
-ON Movies.ID = Directors.MovieID;
+ON Movies.DirectorID = Directors.ID;
 
 SELECT * FROM MovieName_MovieRate_DirectorFullName
 
@@ -118,10 +118,10 @@ CREATE VIEW DirectorName_DirectorSurname_MovieCount AS
 SELECT 
     Directors.[Name] AS Director_Name, 
     Directors.Surname AS Director_Surname, 
-    COUNT(Directors.MovieID) AS Director_Movie_Count
+    COUNT(Movies.DirectorID) AS Director_Movie_Count
 FROM Directors
 JOIN Movies
-ON Movies.ID = Directors.MovieID
+ON Directors.ID = Movies.DirectorID
 GROUP BY Directors.[Name], Directors.Surname;
 
 SELECT * FROM DirectorName_DirectorSurname_MovieCount
@@ -137,7 +137,7 @@ SELECT
 	Actors.Name + ' ' + Actors.Surname AS Actor_Full_Name
 FROM Movies
 JOIN Directors
-ON Movies.ID = Directors.MovieID
+ON Movies.DirectorID = Directors.ID
 JOIN MoviesActors
 ON Movies.ID = MoviesActors.MovieID
 JOIN Actors
@@ -156,7 +156,7 @@ SELECT
     Movies.Rate AS Movie_Rate
 FROM Movies
 JOIN Directors
-ON Movies.ID = Directors.MovieID
+ON Movies.DirectorID = Directors.ID
 JOIN MoviesActors
 ON Movies.ID = MoviesActors.MovieID
 JOIN Actors
