@@ -41,7 +41,7 @@ CREATE TABLE MoviesActors
 	ActorID INT REFERENCES Actors(ID),
 )
 
-INSERT INTO Movies (Name, Rate)
+INSERT INTO Movies (DirectorID, Name, Rate)
 VALUES 
     (1, 'Se7en', 8.5),
     (1, 'Ford v Ferrari', 7.2),
