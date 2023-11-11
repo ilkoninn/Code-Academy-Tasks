@@ -13,7 +13,16 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
         public static void WithdrawUSDDepositAZN(BankCard bankCard, BankCard otherBankCard, decimal amount1, decimal amount2, CurrencyType currencyType1, CurrencyType currencyType2)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             BankCard fromBankCard = null;
             BankCard toBankCard = null;
@@ -63,7 +72,16 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
         public static void WithdrawUSDDepositUSD(BankCard bankCard, BankCard otherBankCard,decimal amount1, decimal amount2, CurrencyType currencyType1, CurrencyType currencyType2)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             BankCard fromBankCard = null;
             BankCard toBankCard = null;
@@ -113,7 +131,16 @@ namespace BankConsoleApp.Models.User_Models.Transfer_Models
         public static void WithdrawUSDDepositEUR(BankCard bankCard, BankCard otherBankCard, decimal amount1, decimal amount2, CurrencyType currencyType1, CurrencyType currencyType2)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             BankCard fromBankCard = null;
             BankCard toBankCard = null;

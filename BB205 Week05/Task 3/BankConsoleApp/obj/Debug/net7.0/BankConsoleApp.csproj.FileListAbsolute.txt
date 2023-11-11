@@ -1,0 +1,17 @@
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\bin\Debug\net7.0\BankConsoleApp.exe
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\bin\Debug\net7.0\BankConsoleApp.deps.json
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\bin\Debug\net7.0\BankConsoleApp.runtimeconfig.json
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\bin\Debug\net7.0\BankConsoleApp.dll
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\bin\Debug\net7.0\BankConsoleApp.pdb
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.csproj.AssemblyReference.cache
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.AssemblyInfoInputs.cache
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.AssemblyInfo.cs
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.csproj.CopyComplete
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.dll
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\refint\BankConsoleApp.dll
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.pdb
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\BankConsoleApp.genruntimeconfig.cache
+C:\Users\99470\Desktop\Algorithm-Tasks\BB205 Week05\Task 3\BankConsoleApp\obj\Debug\net7.0\ref\BankConsoleApp.dll

@@ -12,7 +12,16 @@ namespace BankConsoleApp.Models.User_Models.Update_Model
         public static void UpdateName(User user, string name)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -34,7 +43,16 @@ namespace BankConsoleApp.Models.User_Models.Update_Model
         public static void UpdateSurname(User user, string surname)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -56,7 +74,16 @@ namespace BankConsoleApp.Models.User_Models.Update_Model
         public static void UpdateEmail(User user, string email)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -78,7 +105,16 @@ namespace BankConsoleApp.Models.User_Models.Update_Model
         public static void UpdatePassword(User user, string password)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -100,7 +136,16 @@ namespace BankConsoleApp.Models.User_Models.Update_Model
         public static void UpdatePhoneNumber(User user, string phoneNumber)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -122,7 +167,16 @@ namespace BankConsoleApp.Models.User_Models.Update_Model
         public static void UpdatePincode(User user, BankCard bankCard, int pincode)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {

@@ -83,7 +83,16 @@ namespace BankConsoleApp.Models.User_Models.Deposit_Models
         public static void DepositToUSDBankCard(User user, BankCard bankCard, decimal amount, CurrencyType currencyType)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {

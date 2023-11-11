@@ -12,7 +12,16 @@ namespace BankConsoleApp.Models.Check_Information_Models
         public static BankCard GetBankCard(User user, int choice)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -36,7 +45,16 @@ namespace BankConsoleApp.Models.Check_Information_Models
         public static BankCard GetBankCardByDigit(string digit)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {
@@ -60,7 +78,16 @@ namespace BankConsoleApp.Models.Check_Information_Models
         public static void GetCards(User user)
         {
             string result;
-            string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
+            {
+                if (item == "bin") break;
+                sb.Append(item + '\\');
+            }
+
+            string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
             using (StreamReader sr = new StreamReader(userJSONPath))
             {

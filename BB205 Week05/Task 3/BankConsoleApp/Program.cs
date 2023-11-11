@@ -4,6 +4,7 @@ using BankConsoleApp.Models;
 using Newtonsoft.Json;
 using System.ComponentModel.Design;
 using System.IO.Pipes;
+using System.Text;
 
 namespace BankConsoleApp
 {
@@ -49,7 +50,16 @@ namespace BankConsoleApp
                 else
                 {
                     string result;
-                    string userJSONPath = @"C:\Users\99470\Desktop\BankConsoleApp" + @"\Bank Data" + @"\UserData.json";
+                    string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var item in basePath.Split('\\'))
+                    {
+                        if (item == "bin") break;
+                        sb.Append(item + '\\');
+                    }
+
+                    string userJSONPath = sb + @"Bank Data" + @"\UserData.json";
 
                     using (StreamReader sr = new StreamReader(userJSONPath))
                     {
@@ -158,20 +168,30 @@ namespace BankConsoleApp
 
         public static void CreateData()
         {
-            string dataDir = @"C:\Users\99470\Desktop\BankConsoleApp";
-            string bankDataDir = @"\Bank Data";
 
-            if(!Directory.Exists(dataDir + bankDataDir))
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in basePath.Split('\\'))
             {
-                Directory.CreateDirectory(dataDir + bankDataDir);
+                if (item == "bin") break;
+                sb.Append(item + '\\');
             }
 
-            string userDataDir = dataDir + bankDataDir + @"\UserData.json";
+            string bankDataDir = @"Bank Data";
+
+            if (!Directory.Exists(sb + bankDataDir))
+            {
+                Directory.CreateDirectory(sb + bankDataDir);
+            }
+
+            string userDataDir = sb + bankDataDir + @"\UserData.json";
 
             if(!File.Exists(userDataDir))
             {
                 File.Create(userDataDir);
             }
+
         }
     }
 }
