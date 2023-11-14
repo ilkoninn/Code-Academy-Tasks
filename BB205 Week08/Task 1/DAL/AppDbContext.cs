@@ -17,5 +17,6 @@ namespace EntityFramework.DAL
         }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Company> Companies { get; set; }
     }
 }

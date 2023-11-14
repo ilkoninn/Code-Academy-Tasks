@@ -66,3 +66,11 @@ C:\Users\99470\Desktop\EntityFramework\obj\Debug\net7.0\refint\EntityFramework.d
 C:\Users\99470\Desktop\EntityFramework\obj\Debug\net7.0\EntityFramework.pdb
 C:\Users\99470\Desktop\EntityFramework\obj\Debug\net7.0\EntityFramework.genruntimeconfig.cache
 C:\Users\99470\Desktop\EntityFramework\obj\Debug\net7.0\ref\EntityFramework.dll
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.csproj.AssemblyReference.cache
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.AssemblyInfoInputs.cache
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.AssemblyInfo.cs
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.csproj.CoreCompileInputs.cache
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.dll
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\refint\EntityFramework.dll
+C:\Users\II novbe\Desktop\Code-Academy-Tasks\BB205 Week08\Task 1\obj\Debug\net7.0\EntityFramework.pdb
